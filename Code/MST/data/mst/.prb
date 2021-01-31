@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="mst" file="mst" code="100">
+        <language cmd="fpc mst.pas" file="mst.pas"/>
+        <language cmd="g++ -o mst mst.cpp -lm" file="mst.cpp"/>
+        <language cmd="gcc -o mst mst.c -lm" file="mst.c"/>
+    </source>
+    <task output="mst.out" input="mst.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="mst1.in" out="mst1.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst2.in" out="mst2.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst3.in" out="mst3.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst4.in" out="mst4.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst5.in" out="mst5.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst6.in" out="mst6.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst7.in" out="mst7.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst8.in" out="mst8.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst9.in" out="mst9.out" time="50" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="mst10.in" out="mst10.out" time="50" mem="512"/>
+        </subtask>
+    </task>
+</problem>

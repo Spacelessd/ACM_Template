@@ -1,0 +1,3 @@
+#define sl(n) scanf(%lld",&n)
+
+

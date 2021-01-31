@@ -1,0 +1,85 @@
+我想告诉你关于画图的东西
+（我知道绝对不能成为正确答案的）
+基本几何图形的绘制
+http://www.mydrs.org  2001-12-11  大榕树 
+
+
+画直线:
+1.Line过程
+描述:procedure Line(x1, y1, x2, y2: Integer);两点确定一直线.够简单吧!
+2.Lineto过程
+描述:procedure LineTo(X, Y: Integer);从当前点项目标点(x,y)作直线.
+画圆:
+1.Circle过程 
+功能：以(X,Y)为圆心、Radius为半画一圆。
+描述：procedure Circle(X,Y:Integer;Radius:Word);
+示例：Circle(100,100,200) {画一个以（100，100）为圆心，200为半径的圆}
+画椭圆:
+1. Ellipse过程 
+功能：画一个以(X,Y)为中心，XRadius和YRadius为半轴，StAngle和EndAngle为始角和终角的椭圆弧。
+描述：procedure Ellipse(X,Y:Integer;StAngle,EndAngle:Word;XRadius,YRadius:Word);
+说明：角度沿逆时针方向，单位是度。0度指向东。
+画圆弧: 
+1.Arc过程
+功能: 画一个以（X，Y）为中心，Radius为半径，StAngle和EndAngle为始角和终角 的圆弧。
+描述: procedure Arc(X,Y : Integer; StAngle,EndAngle,Radius:Word);
+说明: 角度沿逆时针方向，单位是度。0度指向东。
+示例: Arc(100,100,0,90,50) {画出第一卦限1/4圆，半径50,圆心（100，100）}
+画矩形:
+1.Bar过程
+功能：画一个以（x1,y1),(x2,y2)为两个对角顶点的矩形。
+描述：procedure Bar(x1,y1,x2,y2:integer);
+示例：Bar(100,100,200,200) {画一个以（100，100），（200，200）为对角顶点的矩形}
+2.Bar3d过程
+功能:画一个长方体.
+描述:procedure Bar3d(x1,y1,x2,y2:integer,depth:word,top:boolean); {x1,x2,y1,y2同上,为长方体的厚度 ,top为是否画出顶面.}
+线形,颜色,及填充设置
+线形设置:
+1.setlinestyle过程
+功能:设置线形,及线宽.
+描述:procedure SetLineStyle(LineStyle: Word; Pattern: Word; Thickness: Word);
+说明:linestyle(线形)一共有三种.代号0,1,2;线形如下图:
+
+Thichness(线宽)有两种.代号1,3.1为普通线.3为宽线. 
+
+2.GetLineSettings过程
+功能:返回当前设置的线型设置信息.
+描述:procedure GetLineSettings(var LineInfo: LineSettingsType);{参见LineSettingsType类型}
+3.LineSettingsType类型
+描述:LineSettingsType = record
+    LineStyle : Word; {线形}
+    Pattern : Word; {模式}
+    Thickness : Word; {线宽}
+   end;
+此类型记录了一种线形的信息.
+线形,颜色及线形设置
+颜色设置:
+在pascal中共有16种颜色可以使用.
+1.setcolor过程
+描述: procedure SetColor(Color: Word);
+设置线的颜色.颜色代码如上图.
+2.GetColor函数
+功能:返回最后一次作图时的颜色值
+描述:function GetColor:word
+示例:color:=GetColor; {color:word}
+3.GetMaxColor函数
+功能:返回系统可用的最大颜色数.
+描述:num:=GetMaxColor; {将最大颜色数存到num变量中}
+填充设置:
+1.SetFillStyle过程 
+功能 设置填充模式和颜色。
+描述 procedure SetFillStyle(Pattern:Word;Color:Word);
+说明 设置用于Bar,Bar3D的填充模式和颜色。可生系列填充模式。缺省模式是实心点，缺省模式
+是实心点，缺省颜色是调色板中最大颜色序号值。如果传递给SetFillStyle的输入参数无效，
+GraphResult将返回值grError,且当前填充参数不改变。
+填充设置如下图:
+
+
+2.FillSettingsType 类型
+描述:FillSettingsType=record
+Pattern:word;
+Color :word;
+end;
+此类型记录了一种填充模式的信息.
+这些知识都很简单，更多的可以在编辑环境中按下f1观看帮助文档。
+更多实例在 www.cpascal.com 的自编程序中。 

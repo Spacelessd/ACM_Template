@@ -1,0 +1,85 @@
+USER: H QZ [hqztrue1]
+TASK: ditch
+LANG: C++
+
+Compiling...
+Compile: OK
+
+Executing...
+   Test 1: TEST OK [0.000 secs, 13468 KB]
+   Test 2: TEST OK [0.000 secs, 13468 KB]
+   Test 3: TEST OK [0.000 secs, 13468 KB]
+   Test 4: TEST OK [0.000 secs, 13468 KB]
+   Test 5: TEST OK [0.000 secs, 13468 KB]
+   Test 6: TEST OK [0.000 secs, 13468 KB]
+   Test 7: TEST OK [0.054 secs, 13468 KB]
+   Test 8: TEST OK [0.011 secs, 13468 KB]
+   Test 9: TEST OK [0.011 secs, 13468 KB]
+   Test 10: TEST OK [0.065 secs, 13468 KB]
+   Test 11: TEST OK [0.076 secs, 13468 KB]
+   Test 12: TEST OK [0.000 secs, 13468 KB]
+
+All tests OK.
+Your program ('ditch') produced all correct answers!  This is your
+submission #11 for this problem.  Congratulations!
+
+
+
+
+
+
+USER: H QZ [hqztrue1]
+TASK: ditch
+LANG: C++
+
+Compiling...
+Compile: OK
+
+Executing...
+   Test 1: TEST OK [0.000 secs, 10784 KB]
+   Test 2: TEST OK [0.000 secs, 10784 KB]
+   Test 3: TEST OK [0.000 secs, 10784 KB]
+   Test 4: TEST OK [0.000 secs, 10784 KB]
+   Test 5: TEST OK [0.000 secs, 10784 KB]
+   Test 6: TEST OK [0.000 secs, 10784 KB]
+   Test 7: TEST OK [0.043 secs, 10784 KB]
+   Test 8: TEST OK [0.032 secs, 10784 KB]
+   Test 9: TEST OK [0.022 secs, 10784 KB]
+   Test 10: TEST OK [0.065 secs, 10784 KB]
+   Test 11: TEST OK [0.076 secs, 10784 KB]
+   Test 12: TEST OK [0.000 secs, 10784 KB]
+
+All tests OK.
+Your program ('ditch') produced all correct answers!  This is your
+submission #12 for this problem.  Congratulations!
+
+
+
+
+
+
+USER: H QZ [hqztrue1]
+TASK: ditch
+LANG: C++
+
+Compiling...
+Compile: OK
+
+Executing...
+   Test 1: TEST OK [0.000 secs, 10796 KB]
+   Test 2: TEST OK [0.000 secs, 10796 KB]
+   Test 3: TEST OK [0.000 secs, 10796 KB]
+   Test 4: TEST OK [0.000 secs, 10796 KB]
+   Test 5: TEST OK [0.000 secs, 10796 KB]
+   Test 6: TEST OK [0.000 secs, 10796 KB]
+   Test 7: TEST OK [0.032 secs, 10796 KB]
+   Test 8: TEST OK [0.032 secs, 10796 KB]
+   Test 9: TEST OK [0.022 secs, 10796 KB]
+   Test 10: TEST OK [0.065 secs, 10796 KB]
+   Test 11: TEST OK [0.076 secs, 10796 KB]
+   Test 12: TEST OK [0.000 secs, 10796 KB]
+
+All tests OK.
+Your program ('ditch') produced all correct answers!  This is your
+submission #15 for this problem.  Congratulations!
+

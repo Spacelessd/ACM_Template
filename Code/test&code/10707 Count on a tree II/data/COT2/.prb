@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="COT2" file="COT2" code="100">
+        <language cmd="fpc COT2.pas" file="COT2.pas"/>
+        <language cmd="g++ -o COT2 COT2.cpp -lm" file="COT2.cpp"/>
+        <language cmd="gcc -o COT2 COT2.c -lm" file="COT2.c"/>
+    </source>
+    <task output="COT2.out" input="COT2.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="cot21.in" out="cot21.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot22.in" out="cot22.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot23.in" out="cot23.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot24.in" out="cot24.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot25.in" out="cot25.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot26.in" out="cot26.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot27.in" out="cot27.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot28.in" out="cot28.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot29.in" out="cot29.out" time="10" mem="4000"/>
+        </subtask>
+        <subtask score="10">
+            <point in="cot210.in" out="cot210.out" time="10" mem="4000"/>
+        </subtask>
+    </task>
+</problem>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="src" file="src" code="100">
+        <language cmd="fpc src.pas" file="src.pas"/>
+        <language cmd="g++ -o src src.cpp -lm" file="src.cpp"/>
+        <language cmd="gcc -o src src.c -lm" file="src.c"/>
+    </source>
+    <task output="src.out" input="src.in" io="0" checker="全文比较"/>
+</problem>

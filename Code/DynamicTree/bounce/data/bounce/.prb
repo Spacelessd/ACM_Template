@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="bounce" file="bounce" code="100">
+        <language cmd="fpc bounce.pas" file="bounce.pas"/>
+        <language cmd="g++ -o bounce bounce.cpp -lm" file="bounce.cpp"/>
+        <language cmd="gcc -o bounce bounce.c -lm" file="bounce.c"/>
+    </source>
+    <task output="bounce.out" input="bounce.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="bounce1.in" out="bounce1.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce2.in" out="bounce2.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce3.in" out="bounce3.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce4.in" out="bounce4.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce5.in" out="bounce5.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce6.in" out="bounce6.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce7.in" out="bounce7.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce8.in" out="bounce8.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce9.in" out="bounce9.out" time="10" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="bounce10.in" out="bounce10.out" time="10" mem="128"/>
+        </subtask>
+    </task>
+</problem>

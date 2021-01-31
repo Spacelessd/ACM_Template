@@ -1,0 +1,49 @@
+-o
+
+~ time=4687
+| time=4375
+& time=4360
+^ time=4359
+= time=3641
+=~ time=5187
+reset time=3281
+flip time=3625
+[x] time=3844
+
+~ time=4469
+| time=3672
+& time=3672
+^ time=3703
+= time=3687
+=~ time=4922
+reset time=3250
+flip time=3219
+[x] time=3313
+
+请按任意键继续. . .
+
+-O2
+
+~ time=0
+| time=812
+& time=813
+^ time=875
+= time=3734
+=~ time=2219
+reset time=3266
+flip time=781
+[x] time=781
+
+~ time=1984
+| time=781
+& time=782
+^ time=781
+= time=3641
+=~ time=2468
+reset time=3250
+flip time=766
+[x] time=766
+
+请按任意键继续. . .
+
+

@@ -1,0 +1,4 @@
+g++ a.cpp -o a -g
+g++ a.cpp -o a -Wall -g
+g++ -o a a.cpp -lm -Wl,-stack=1000000000
+g++ a.cpp -o a -O2

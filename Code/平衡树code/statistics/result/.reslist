@@ -1,0 +1,35 @@
+Leftist Heap/statistics/100/0.359375/N/
+Skew Heap/statistics/100/0.359375/N/
+Pairing Heap/statistics/100/0.390625/N/
+Random Heap/statistics/100/0.4375/N/
+heap/statistics/100/0.453125/N/
+退化版SBT/statistics/100/0.59375/N/
+RBtree/statistics/100/0.609375/N/
+splay_shit/statistics/100/0.640625/N/
+Fibheap/statistics/100/0.6875/N/
+RBtree_old/statistics/100/0.765625/N/
+Btree_shit/statistics/100/0.796875/N/
+Size Balanced Tree/statistics/100/0.796875/N/
+AAtree/statistics/100/0.84375/N/
+treap/statistics/100/0.84375/N/
+BST/statistics/100/0.859375/N/
+Scapegoat tree/statistics/100/0.859375/N/
+k叉堆/statistics/100/0.890625/N/
+SBT_old/statistics/100/0.90625/N/
+AVL/statistics/100/0.921875/N/
+Btree/statistics/100/1.04688/N/
+splay/statistics/100/1.10938/N/
+treap_old/statistics/100/1.10938/N/
+SkipList_n^e_best/statistics/100/1.125/N/
+AVL_old/statistics/100/1.26562/N/
+splay_short/statistics/100/1.5625/N/
+SkipList/statistics/100/1.76562/N/
+splay_old/statistics/100/2/N/
+单旋splay/statistics/100/2.01562/N/
+priority_queue/statistics/100/2.1875/N/
+块状链表/statistics/100/3.17188/N/
+函数式Treap/statistics/100/3.3125/N/
+复件 函数式Treap/statistics/100/4.15625/N/
+函数式Treap_old(new node)/statistics/100/10.3281/N/
+SkipList_sqrt(n)/statistics/100/18.5/N/
+复件 复件 函数式Treap/statistics/100/5.5/N/

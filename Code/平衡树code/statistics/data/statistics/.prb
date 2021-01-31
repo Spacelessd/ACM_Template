@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="statistics" file="statistics" code="100">
+        <language cmd="fpc statistics.pas" file="statistics.pas"/>
+        <language cmd="g++ -o statistics statistics.cpp -lm" file="statistics.cpp"/>
+        <language cmd="gcc -o statistics statistics.c -lm" file="statistics.c"/>
+    </source>
+    <task output="statistics.out" input="statistics.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="statistics1.in" out="statistics1.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics2.in" out="statistics2.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics3.in" out="statistics3.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics4.in" out="statistics4.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics5.in" out="statistics5.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics6.in" out="statistics6.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics7.in" out="statistics7.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics8.in" out="statistics8.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics9.in" out="statistics9.out" time="5" mem="1024"/>
+        </subtask>
+        <subtask score="10">
+            <point in="statistics10.in" out="statistics10.out" time="5" mem="1024"/>
+        </subtask>
+    </task>
+</problem>

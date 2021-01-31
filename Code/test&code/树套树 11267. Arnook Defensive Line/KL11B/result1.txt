@@ -1,0 +1,115 @@
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>mkd
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>1  ::dhh_treap_TLE
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>2  ::treap
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>3  ::分治+树状数组_dhh
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>4  ::treap++
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>5  ::splay
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>6  ::RBtree
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>7  ::分治+树状数组
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>8  ::分治+树状数组without T
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 2.out
+正在比较文件 1.out 和 2.OUT
+***** 1.out
+39599
+time=9406
+***** 2.OUT
+39599
+time=5500
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 3.out
+正在比较文件 1.out 和 3.OUT
+***** 1.out
+39599
+time=9406
+***** 3.OUT
+39599
+time=1031
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 4.out
+正在比较文件 1.out 和 4.OUT
+***** 1.out
+39599
+time=9406
+***** 4.OUT
+39599
+time=4812
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 5.out
+正在比较文件 1.out 和 5.OUT
+***** 1.out
+39599
+time=9406
+***** 5.OUT
+39599
+time=5171
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 6.out
+正在比较文件 1.out 和 6.OUT
+***** 1.out
+39599
+time=9406
+***** 6.OUT
+39599
+time=3937
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 7.out
+正在比较文件 1.out 和 7.OUT
+***** 1.out
+39599
+time=9406
+***** 7.OUT
+39599
+time=1031
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>fc 1.out 8.out
+正在比较文件 1.out 和 8.OUT
+***** 1.out
+39599
+time=9406
+***** 8.OUT
+39599
+time=1203
+*****
+
+
+C:\Documents and Settings\Administrator\桌面\资料\11267. Arnook Defensive Line\K
+L11B>pause
+请按任意键继续. . .

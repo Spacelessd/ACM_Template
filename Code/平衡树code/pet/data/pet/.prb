@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="pet" file="pet" code="100">
+        <language cmd="fpc pet.pas" file="pet.pas"/>
+        <language cmd="g++ -o pet pet.cpp -lm" file="pet.cpp"/>
+        <language cmd="gcc -o pet pet.c -lm" file="pet.c"/>
+    </source>
+    <task output="pet.out" input="pet.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="input.001" out="output.001" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.002" out="output.002" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.003" out="output.003" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.004" out="output.004" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.005" out="output.005" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.006" out="output.006" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.007" out="output.007" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.008" out="output.008" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.009" out="output.009" time="1" mem="128"/>
+        </subtask>
+        <subtask score="10">
+            <point in="input.010" out="output.010" time="1" mem="128"/>
+        </subtask>
+    </task>
+</problem>

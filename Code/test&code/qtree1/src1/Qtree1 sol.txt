@@ -1,0 +1,32 @@
+sol1:
+n log n
+
+void Answer(int l,int r){
+	ËõÊ÷
+	if (l<r){
+		int mid=(l+r)>>1;
+		Answer(l,mid);
+		calc_L_to_R
+		Answer(mid+1,r);
+	}
+	»Ö¸´ 
+}
+
+
+
+
+
+sol2:
+n*n^1/3
+
+void Answer(int n){
+	¿é×´Ê÷(n)  //time=n*sqrt(n)
+}
+void f(int n){
+	x=n^1/3
+	for (int i=1;i<=n/x;++i){
+		ËõÊ÷((i-1)*x+1,(i-1)*x);  //time=O(n)
+		Answer(n/x);
+		}
+	
+}

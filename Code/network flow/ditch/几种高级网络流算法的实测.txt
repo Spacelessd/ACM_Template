@@ -1,0 +1,32 @@
+几种高级网络流算法的实测
+这还是我今年NOI前做的测试。使用的数据是100~1000个点的稠密图。输入输出格式同USACO的ditch那道题。
+
+参与测试的程序有（按名次）：
+1. HLPP by Wisdom （满分，用时最短，程序也最长）
+2. Dinic by dd_engi （我最推荐的算法）
+3. RelableToFront (+GapHeuristic) by dd_engi
+4. RelableToFront (+GapHeuristic+InitLabel) by dd_engi
+5. Dinic by wxsxg
+6. DistanceLabel by dd_engi （超时三个点，下同）
+7. RelabelToFront by dd_engi
+
+由这次测试得出的结论大致有：
+1. Dinic是性价比最高的算法，但必须实现得比较好才行（简洁的非递归程序）。
+2. Preflow（用RelabelToFront实现）易退化。
+3. DistanceLabel也易退化，而且退化的测试点与Preflow一样。
+4. 加入GapHeuristic可以解决上面两个退化。但还是不如Dinic，所以很鸡肋。
+5. RelabelToFront加InitLabel没用。
+6. 对于这次评测的稠密图来说，用邻接矩阵的HLPP是最强的。
+
+当时的测试程序和数据：
+ditch.zip (14.34 KB)
+ditch.zip (14.34 KB)
+下载次数: 94
+2007-11-14 09:56 AM
+
+
+由于data很大，所以只给了datamaker，用Dev-C++编译运行应该可以得到和当时一模一样的数据。/data/readme.txt中有使用说明。
+
+另：我知道这个在NOIP前发是不合时宜的，提醒一下NOIPer完全不用看。其实这个东西好久以前就打算发，但一直忘掉。再不发的话不及可能就永远也想不起来了……
+
+搜索更多相关主题的帖子: 网络流 

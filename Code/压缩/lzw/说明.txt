@@ -1,0 +1,2 @@
+文本文件的编码与解码：input.txt,decode.txt,encode.txt
+gif的编码与解码：input.gif,decode.gif,encode.e

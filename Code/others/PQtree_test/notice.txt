@@ -1,0 +1,19 @@
+struct node{
+	char type,p_type;int time,full_size,partial_size,son_size,tmp_size,flag;
+	node *p,*l,*r,*full_son_l,*full_son_r,*leftson,*rightson;
+
+son_size
+*p,*l,*r,*full_son_l,*full_son_r,*leftson,*rightson
+
+
+
+char type,p_type;int time,full_size,partial_size,son_size,tmp_size,flag;  
+node *p,*l,*r,*leftson,*rightson,*partial_son[2];
+vector<node*> son;
+
+
+char type,p_type;int time,full_size,partial_size,son_size,tmp_size,flag; 
+node *p,*link[2],*leftson,*rightson,*partial_son[2];
+vector<node*> son;
+
+

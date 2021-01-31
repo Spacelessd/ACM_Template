@@ -1,0 +1,124 @@
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel=stylesheet href='include/hoj.css' type='text/css'>
+</head>
+<body>
+<center>
+<div style="width:90%; text-align:left">
+<img src="image/logo.png"/>
+</div>
+<table width=96%> 
+	<tr align="center" class='hd' valign="top">
+				<th><a href="faqs.php">F.A.Qs</a></th>
+		<th><a href="./bbs.php">Web Board</a></th>
+		<th><a href="./">Home</a></th>
+		<th><a href="./problemset.php">ProblemSet</a></th>
+		<th><a href="./status.php">Status</a></th>
+		<th><a href="./ranklist.php">Ranklist</a></th>
+		<th><a href="./contest.php">Contest</a></th>
+		<th><a href=loginpage.php>Login</a></th><th><a href=registerpage.php>Register</a></th>		<th><a href="./donation.php" class="highlight">捐赠本站</a></th>
+	</tr>
+</table>
+</center>
+<center>
+<div class="notice">
+	<div>
+		<B>Notice:</B>应某些Oier要求，本站现开通发送数据、报告等有偿服务。详情请咨询lydsy2012@163.com	</div>
+</div>
+</center>
+</div>
+<title>Problem 2325. -- [ZJOI2011]道馆之战</title><center><h2>2325: [ZJOI2011]道馆之战</h2><span class=green>Time Limit: </span>40 Sec&nbsp;&nbsp;<span class=green>Memory Limit: </span>256 MB<br><span class=green>Submit: </span>304&nbsp;&nbsp;<span class=green>Solved: </span>126<br>[<a href='submitpage.php?id=2325'>Submit</a>][<a href='problemstatus.php?id=2325'>Status</a>][<a href='bbs.php?id=2325'>Discuss</a>]</center><h2>Description</h2><div class=content><div class="Section0" style="layout-grid:  15.6pt none">
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">口袋妖怪<font face="Times New Roman">(</font><font face="宋体">又名神奇宝贝或宠物小精灵</font><font face="Times New Roman">)</font><font face="宋体">红</font><font face="Times New Roman">/</font><font face="宋体">蓝</font><font face="Times New Roman">/</font><font face="宋体">绿宝石中的水系道馆需要经过三个冰地才能到达馆主的面前，冰地中的每一个冰块都只能经过一次。当一个冰地上的所有冰块都被经过之后，到下一个冰地的楼梯才会被打开。</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">三个冰地分别如下：</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt; margin-left: 24pt; text-align: center"><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p><img alt="" src="/JudgeOnline/upload/201106/1(1).jpg" /></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">当走出第三个冰地之后，就可以与馆主进行道馆战了。</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">馆主发现这个难度太小，导致经常有挑战者能通过，为了加大难度，将道馆分成了</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">个房间，每个房间中是两个冰块或障碍，表示一列冰地。任意两个房间之间均有且仅有一条路径相连，即这</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">个房间构成一个树状结构。</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">每个房间分成了</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">A</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">和</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">B</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">两个区域，每一区域都是一个薄冰块或者障碍物。每次只能移动到相邻房间的同一类区域<font face="Times New Roman">(</font><font face="宋体">即若你现在在这个房间的</font></span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">A</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">区域，那么你只能移动到相邻房间的</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">A</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">区域<font face="Times New Roman">)</font><font face="宋体">或这个房间的另一区域。</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">现在挑战者从房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">出发，馆主在房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">v</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">，那么挑战者只能朝接近馆主所在房间的方向过去。一开始挑战者可以在房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">的任意一个冰块区域内。如果挑战者踩过的冰块数达到了最大值<font face="Times New Roman">(</font><font face="宋体">即没有一种方案踩过的冰块数更多了</font><font face="Times New Roman">)</font><font face="宋体">，那么当挑战者走到最后一个冰块上时，他会被瞬间传送到馆主面前与馆主进行道馆战。</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 7.8pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">自从馆主修改规则后已经经过了</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">m</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">天，每天要么是有一个挑战者来进行挑战，要么就是馆主将某个房间进行了修改。对于每个来的挑战者，你需要计算出他若要和馆主进行战斗需要经过的冰块数。</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p0" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 10.5pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+</div>
+<!--EndFragment--></div><h2>Input</h2><div class=content><p class="p18" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'"><font face="宋体">第一行包含两个正整数</font></span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">和</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">m</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">。</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">第<font face="Times New Roman">2</font><font face="宋体">行到第</font></span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">行，每行包含两个正整数</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">x</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">和</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">y</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">，表示一条连接房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">x</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">和房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">y</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">的边。房间编号为<font face="Times New Roman">1</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'">&hellip;</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">。</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">接下来</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">行，每行包含两个字符。第</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">n</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">&nbsp;+&nbsp;</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">k</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">行表示房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">k</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">的两个区域，第一个字符为</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">A</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">区域，第二个字符为</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">B</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">区域。其中&ldquo;<font face="Times New Roman">.</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'">&rdquo;</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">(ASCII<font face="宋体">码为</font><font face="Times New Roman">46)</font><font face="宋体">表示是薄冰块，&ldquo;</font><font face="Times New Roman">#</font><font face="宋体">&rdquo;</font><font face="Times New Roman">(ASCII</font><font face="宋体">码为</font><font face="Times New Roman">35)</font><font face="宋体">表示是障碍物。</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">最后的</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">m</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">行，每行一个操作：</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 45pt; text-indent: -21pt"><span style="font-size: 12pt; font-family: 'Wingdings'; mso-spacerun: 'yes'">l&nbsp;</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">C&nbsp;</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">&nbsp;</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">s</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">：将房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">里的两个区域修改为</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">s</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">。</span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p>
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 45pt; text-indent: -21pt"><span style="font-size: 12pt; font-family: 'Wingdings'; mso-spacerun: 'yes'">l&nbsp;</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">Q&nbsp;</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">&nbsp;</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">v</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">：询问挑战者在房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">，馆主在房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">v</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">时，挑战者能与馆主进行挑战需要踩的冰块数。如果房间</span><span style="font-size: 12pt; font-style: italic; font-family: '宋体'; mso-spacerun: 'yes'">u</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">的两个区域都是障碍物，那么输出<font face="Times New Roman">0</font><font face="宋体">。</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p></div><h2>Output</h2><div class=content><p class="p18" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'"><font face="Times New Roman">&nbsp;</font><font face="宋体">包含若干行，每行一个整数。即对于输入中的每个询问，依次输出一个答案。</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p></div><h2>Sample Input</h2>
+			<div class=content><span class=sampledata>5 3<br />
+<br />
+1 2<br />
+<br />
+2 3<br />
+<br />
+2 4<br />
+<br />
+1 5<br />
+<br />
+.#<br />
+<br />
+..<br />
+<br />
+#.<br />
+<br />
+.#<br />
+<br />
+..<br />
+<br />
+Q 5 3<br />
+<br />
+C 1 ##<br />
+<br />
+Q 4 5<br />
+<br />
+</span></div><h2>Sample Output</h2>
+			<div class=content><span class=sampledata>6<br />
+<br />
+3<br />
+<br />
+</span></div><h2>HINT</h2>
+			<div class=content><p><p class="p18" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-weight: bold; font-size: 12pt; font-family: '黑体'; mso-spacerun: 'yes'">【样例说明】</span><span style="font-weight: bold; font-size: 12pt; font-family: 'Arial'; mso-spacerun: 'yes'"><o:p></o:p></span></p><br />
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">第一个询问，从房间<font face="Times New Roman">5</font><font face="宋体">出发经过的冰块数最多的路径为：</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p><br />
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><img height="117" alt="" width="184" src="file:///C:/DOCUME~1/ADMINI~1/LOCALS~1/Temp/ksohtml/wps_clip_image-26071.png" /><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p><br />
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">第二个询问，从房间<font face="Times New Roman">4</font><font face="宋体">出发经过的冰块数最多的路径为：</font></span><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p><br />
+<p class="p19" style="margin-top: 0pt; margin-bottom: 0pt"><img height="113" alt="" width="189" src="file:///C:/DOCUME~1/ADMINI~1/LOCALS~1/Temp/ksohtml/wps_clip_image-5049.png" /><span style="font-size: 12pt; font-family: 'Times New Roman'; mso-spacerun: 'yes'"><o:p></o:p></span></p><br />
+<p class="p18" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-weight: bold; font-size: 12pt; font-family: '黑体'; mso-spacerun: 'yes'">【数据规模】</span><span style="font-weight: bold; font-size: 12pt; font-family: 'Arial'; mso-spacerun: 'yes'"><o:p></o:p></span></p><br />
+<!--EndFragment--><br />
+<p><br />
+<table align="center" style="padding-right: 5.4pt; padding-left: 5.4pt; padding-bottom: 0pt; padding-top: 0pt; border-collapse: collapse; mso-table-layout-alt: fixed"><br />
+    <tbody><br />
+        <tr><br />
+            <td valign="top" width="94" style="border-right: rgb(0,0,0) 0.5pt solid; padding-right: 5.4pt; border-top: rgb(0,0,0) 0.5pt solid; padding-left: 5.4pt; padding-bottom: 0pt; border-left: rgb(0,0,0) 0.5pt solid; width: 70.85pt; padding-top: 0pt; border-bottom: rgb(0,0,0) 0.5pt solid; mso-border-bottom-alt: 0.5000pt solid rgb(0,0,0); mso-border-left-alt: 0.5000pt solid rgb(0,0,0); mso-border-right-alt: 0.5000pt solid rgb(0,0,0); mso-border-top-alt: 0.5000pt solid rgb(0,0,0)"><br />
+            <p class="p18" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'">&nbsp;N</span><span style="font-size: 12pt; font-family: 'Times New Roman'">&le;</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">&nbsp;30&nbsp;000</span><span style="font-size: 12pt; font-family: 'Times New Roman'"><o:p></o:p></span></p><br />
+            </td><br />
+            <td valign="top" width="94" style="border-right: rgb(0,0,0) 0.5pt solid; padding-right: 5.4pt; border-top: rgb(0,0,0) 0.5pt solid; padding-left: 5.4pt; padding-bottom: 0pt; border-left: medium none; width: 70.9pt; padding-top: 0pt; border-bottom: rgb(0,0,0) 0.5pt solid; mso-border-bottom-alt: 0.5000pt solid rgb(0,0,0); mso-border-left-alt: none; mso-border-right-alt: 0.5000pt solid rgb(0,0,0); mso-border-top-alt: 0.5000pt solid rgb(0,0,0)"><br />
+            <p class="p18" style="margin-top: 0pt; margin-bottom: 0pt"><span style="font-size: 12pt; font-family: '宋体'">M&nbsp;</span><span style="font-size: 12pt; font-family: 'Times New Roman'">&le;</span><span style="font-size: 12pt; font-family: '宋体'; mso-spacerun: 'yes'">&nbsp;80&nbsp;000</span><span style="font-size: 12pt; font-family: 'Times New Roman'"><o:p></o:p></span></p><br />
+            </td><br />
+        </tr><br />
+    </tbody><br />
+</table><br />
+<!--EndFragment--></p></p></div><h2>Source</h2>
+			<div class=content><p><a href='problemset.php?search=Day2'>Day2</a></p></div><center>[<a href='submitpage.php?id=2325'>Submit</a>][<a href='problemstatus.php?id=2325'>Status</a>][<a href='bbs.php?id=2325'>Discuss</a>]</center>﻿<br>
+
+<a href="./"><span class=red>HOME</span></a>
+<a href="javascript:history.go(-1)"><span class=red>Back</span></a>
+
+<hr>
+<center>
+	<div class="footer">
+			<a href=setlang.php?lang=ko>한국어</a>&nbsp;
+		<a href=setlang.php?lang=cn>中文</a>&nbsp;
+		<a href=setlang.php?lang=fa>فارسی</a>&nbsp;
+		<a href=setlang.php?lang=en>English</a>&nbsp;
+		<a href=setlang.php?lang=th>ไทย</a>
+	<br>		<div>版权所有 &copy;2008-2012 耒阳大视野教育培训机构 | <script src="http://s21.cnzz.com/stat.php?id=2982771&web_id=2982771" language="JavaScript"></script>
+</div>
+		<div>Based on opensource project <a href="http://hustoj.googlecode.com">hustoj</a>.</div>
+	</div>
+</center>
+</body>
+</html>
+<!--D�����ӊx��t`���k���
+b@�Ƿ.C�`'����P����n9��mv�zs��	���2��4�98:e!�;��v)bZ)��C��>G�ɽ���q���1ٲ�b	6���tW���&1l�t�з-☘�ѨU�!+�����C��$�,ρ`�r���LT�|ޥ�(~e��M��#��2q�@�Jx���Ǌ��_-r��l2�d*��+L�}���4��{�$�X�[ā��u������d/�][���3�8��>b�)�f�n*t^�f�s0����1�9p�J/���~��R��u?;Al\g�Tk'U�E�N��Uk}>��>�g7����
+�?�p�'~���DnW?��Gc�� �MR$V��M�M�M��LխS?�M �M-->

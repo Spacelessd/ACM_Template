@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="cheat" file="cheat" code="100">
+        <language cmd="fpc cheat.pas" file="cheat.pas"/>
+        <language cmd="g++ -o cheat cheat.cpp -lm" file="cheat.cpp"/>
+        <language cmd="gcc -o cheat cheat.c -lm" file="cheat.c"/>
+    </source>
+    <task output="cheat.out" input="cheat.in" io="0" checker="全文比较">
+        <subtask score="5">
+            <point in="cheat1.in" out="cheat1.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat2.in" out="cheat2.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat3.in" out="cheat3.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat4.in" out="cheat4.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat5.in" out="cheat5.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat6.in" out="cheat6.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat7.in" out="cheat7.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat8.in" out="cheat8.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat9.in" out="cheat9.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat10.in" out="cheat10.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat11.in" out="cheat11.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat12.in" out="cheat12.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat13.in" out="cheat13.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat14.in" out="cheat14.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat15.in" out="cheat15.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat16.in" out="cheat16.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat17.in" out="cheat17.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat18.in" out="cheat18.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat19.in" out="cheat19.out" time="1" mem="128"/>
+        </subtask>
+        <subtask score="5">
+            <point in="cheat20.in" out="cheat20.out" time="1" mem="128"/>
+        </subtask>
+    </task>
+</problem>

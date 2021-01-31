@@ -1,0 +1,797 @@
+
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta http-equiv="content-type" content="text/html;charset=gbk"/>
+    <meta http-equiv="content-style-type" content="text/css"/>
+    <meta http-equiv="content-script-type" content="text/javascript"/>
+    <meta name="version" content="neblog-1.0"/>
+    <script type="text/javascript">
+      
+      
+      document.uniqueID!=document.uniqueID&&!!location.hash&&(location.hash=location.hash); 
+      document.domain = location.hostname.replace(/^.*\.([\w]+\.[\w]+)$/,'$1');
+      window.focus();
+      window.getMusicTimeStamp=function(){return '6681ee03bdbfa16622c8a6d405f25bd4';};
+    </script>
+<title>挖掘Treap的潜力 - fanhq666的日志 - 网易博客</title>
+<meta name="author" content="fanhq666,fanhq666"/>
+<meta name="keywords" content="挖掘Treap的潜力,日志,fanhq666,fanhq666的博客,网易博客,网易,blog"/>
+<meta name="description" content="挖掘Treap的潜力,fanhq666的网易博客,Fan-Fun,"/>
+  <script type="text/javascript">
+    (function(){
+     var R=24,C=11,a=[];
+     for(var i=0;i<C;i++)for(var j=0;j<R;a.push('.icn0-'+i+j+'{background-position:'+(i>0?('-'+i*40+'px'):'0')+' '+(j>0?('-'+j*20+'px'):'0')+';}'),j++);
+          document.write('<style type="text/css">'+a.join('')+'</st'+'yle>');
+    })();
+  </script>
+    <link type="text/css" rel="stylesheet" href="http://b2.bst.126.net/newpage/r/c/c.css?v=1980422684"/>
+    <link type="text/css" rel="stylesheet" href="http://b.bst.126.net/newpage/style/nblog/4011/nb.css" id="blog-163-com-theme"/>
+  <!--[if lte IE 6]>
+  <style type="text/css">
+    html,body,#blog-163-com-ie6body{height:100%;width:100%;overflow:hidden;}
+    #blog-163-com-ie6body{overflow:auto;overflow-y:scroll;}
+    #blog-163-com{background:none;}
+  </style>
+  <![endif]-->
+  
+  
+  <style type="text/css">.m-3 .nbw-ryt .left .mcnt{padding-left:10px;}.m-3 .nbw-ryt .right .acts{position:relative;margin:0 0 12px 0;line-height:20px;}.m-3 .nbw-ryt .right .more{margin-top:-15px;height:24px;line-height:24px;}#blog-163-com .m-3 .phide{display:none;}.m-3 .nbw-ryt .left .nbw-bitm{margin:0;padding:0 0 0 10px;position:relative;}.m-3 .nbw-ryt .left .nbw-bitm .title{margin:30px 0 20px;}.m-3 .nbw-ryt .left .nbw-bitm .title .tcnt{font-size:20px;font-family:'微软雅黑','黑体',Arial,Helvetica,Sans-Serif;}.m-3 .nbw-ryt .left .nbw-bitm .tdep{margin-bottom:20px;}.m-3 .nbw-ryt .left .nbw-bitm .tbar{margin:5px 0;padding:10px 10px 10px 0;line-height:20px;text-align:right;}.m-3 .nbw-ryt .left .nbw-bitm .bct{font-size:14px;padding-left:0}.m-3 .nbw-ryt .left .nbw-bitm .muava{float:left;margin:5px 7px 0 0;border-width:0 1px 0 0;height:40px;}.m-3 .nbw-ryt .left .snl .pnb div{line-height:20px;text-align:left;}.m-3 .nbw-ryt .cite{margin:20px 0 0 50px;line-height:24px;text-align:left;}.m-3 .nbw-ryt .cite .close{float:right;margin:0;text-align:right;}.m-3 .nbw-ryt .cite span{cursor:pointer;}.m-3 .nbw-ryt .cite .nbw-act{text-align:center;}.m-3 .nbw-ryt .cite .ads{margin-left:20px;width:400px;}.m-3 .nbw-ryt .cite .tbac{margin-left:60px;padding:0;border:0;list-style:none;line-height:24px;}.m-3 .nbw-ryt .cite .tbl{width:150px;overflow:hidden;}.m-3 .nbw-ryt .cite .tbr{margin-left:20px;overflow:hidden;}.m-3 .nbw-act-share{position:relative;}.m-3 .nbw-act-share .nas-wrap{visibility:hidden;}.m-3 .nbw-act-share:hover .nas-wrap,.m-3 .js-share-hover .nas-wrap{visibility:visible;}.m-3 .nas-wrap,.nas-itm,.nas-wb{background:url(/newpage/images/blog/icn-share.png?0011) no-repeat 9999px 9999px;}.m-3 .nas-wrap{margin-top:5px;}.nas-itm,.nas-wb{text-decoration:none;}.nas-itm,.nas-wb:hover{text-decoration:underline;}.m-3 .nas-itm{float:left;width:16px;height:16px;margin:0 1px 0 6px;overflow:hidden;cursor:pointer;}.m-3 .nas-itm0{background-position:0 -173px;}.m-3 .nas-itm1{background-position:0 -56px;}.m-3 .nas-itm2{background-position:0 -85px;}.m-3 .nas-itm3{background-position:0 -227px;}.m-3 .nas-itm4{background-position:0 -143px;}.m-3 .nas-itm5{background-position:0 -201px;}.m-3 .nas-itm6{background-position:0 -249px;}.m-3 .nas-itm7{background-position:0 -283px;}.m-3 .nas-itm8{background-position:0 -313px;}.m-3 .nas-itm9{background-position:0 -342px;}.nas-wb{padding-left:20px;cursor:pointer;line-height:normal;background-position:0 -173px;}.nas-icn0fix{margin-top:4px;}.nas-tofix{margin-top:0;*margin-top:2px;line-height:25px;}.m-3 .ptc{position:absolute;cursor:pointer;}.m-3 .ptc .ptcp .bcmimg{float:left;background-image:url("http://b.bst.126.net/newpage/images/blogcmtimg.png");background-position:0 0;background-repeat:no-repeat;height:22px;line-height:22px;width:22px;padding:0 6px 0 0;}.m-3 .ptc .ptcp{cursor:pointer;position:absolute;left:5px;bottom:5px;clear:both;width:94px;}.m-3 .ptc .ptcp .ptcmi{float:left;width:16px;height:16px;padding:3px 6px 3px 5px;_padding:2px 6px 0 3px;margin:0;}.m-3 .ptc .ptcp .ptcmt{background-position:-418px -50px;float:left;width:67px;height:22px;overflow:hidden;margin:0px 0 0 -3px;line-height:22px;*line-height:23px;text-align:left;color:#444444;}.m-3 .ptc .ptcp .ptcmt-2{width:61px;padding-left:6px;background-position:-424px -50px;}.m-3 .relateblog{text-align:left;}.m-3 .relateblog h4{margin:0;padding:0 0 0 10px;line-height:30px;}.m-3 .relateblog .cnt{padding-left:8px;margin:10px 0 10px 0px;}.m-3 .relateblog .cnt ul{margin:0;padding:0;list-style:none;}.m-3 .relateblog .cnt ul li{height:24px;margin-right:20px;line-height:24px;}.m-3 .relateblog .cnt ul li span{margin:0 8px;}.m-3 .author, .m-3 .comment{text-align:left;}.m-3 .author .nlogif{width:150px;line-height:20px;margin-left:5px;_margin-left:3px;}.m-3 .author .nlogif .nbw-fce{margin:0 3px 0 10px;_margin-left:5px}.m-3 .author .nlogif .pright{width:85px;margin:0;padding:5px 0;_padding-top:10px}.m-3 .nbw-ryt .right h4{margin:0;padding:0;line-height:30px;}.m-3 .author h4, .m-3 .comment h4{margin:0;padding:0 0 0 10px;line-height:30px;}.m-3 .author .cwd{border:0;text-align:left;}.m-3 .author .vname{width:50px;text-align:center;}.m-3 .author .cnt{margin:10px 0 10px -5px;}.m-3 .author .nbw-fce{margin:0 11px;}.m-3 .author .nbw-f50{width:50px}.m-3 .nbw-ryt .left .top{position:relative;padding-bottom:5px;line-height:20px;}.m-3 .nbw-ryt .left .top .ilft{position:absolute;left:0;top:0;}.m-3 .nbw-ryt .left .top .irgt{position:absolute;right:-10px;top:0;}.m-3 .nbw-ryt .left .top .pleft{margin-left:20px;_margin-left:10px;overflow:hidden;width:40%;height:20px;text-align:left}.m-3 .nbw-ryt .left .top .pright{margin-right:10px;_margin-right:5px;overflow:hidden;width:40%;height:20px;text-align:right}.m-3 .nbw-ryt .left .snl .top{position:relative;padding:5px 0 15px 0;line-height:20px;}.m-3 .nbw-ryt .left .snl .top .ilft{position:absolute;left:-10px;top:5px;}.m-3 .nbw-ryt .left .snl .top .irgt{position:absolute;right:-10px;top:5px;}.m-3 .nbw-ryt .left .snl .top .pleft{margin-left:10px;_margin-left:5px;overflow:hidden;width:40%;height:20px;text-align:left}.m-3 .nbw-ryt .left .snl .top .pright{margin-right:10px;_margin-left:5px;overflow:hidden;width:40%;height:20px;text-align:right}.m-3 .nbw-ryt .left .snl .pnb{padding:5px 0 10px 10px;overflow:hidden;_width:100%}.m-3 .comment h4{padding:0 0 0 10px}.m-3 .comment .publish{margin:10px 0;padding:0 0 10px 5px;text-align:left;}.m-3 .comment .publish .nbw-fce{padding-top:0;}.m-3 .comment .publish .nbw-fce .cwd{border:0;}.m-3 .comment .publish .redt{margin-left:65px;}.m-3 .comment .nolog{border:1px solid #000;background-color:#FFFFE1;height:40px;line-height:40px;text-align:center;padding:0;_padding:10px 0;_height:20px;}.m-3 .comment .case{padding-left:5px;padding-bottom:10px;}.m-3 .comment .vgl{margin:8px;width:75%;text-align:center;}#blog-163-com .m-3 .comment .nbw-cmt .cnt{width:488px;}#blog-163-com .m-3 .comment .nbw-cmt .nbw-cmt .cnt{width:444px;}.m-3 .edt-cmt{width:444px;}.m-3 .comment .publish .edt-cmt{width:488px;}.m-3 .comment .publish .edt-cmt .zbcc{display:none;}.m-3 .nbw-ryt .left .nbw-bitm .js-fs0{font-size:150%;}.m-3 .nbw-ryt .left .nbw-bitm .js-fs1{font-size:130%;}.m-3 .nbw-ryt .left .nbw-bitm .js-fs2{}.m-3 .nbw-ryt .left .nbw-bitm .js-fs3{font-size:12px;}.m-3 .js-fcurrent{font-color:#000;font-weight:bold;text-decoration:none;}.m-3 .nbw-bitm .dream{margin-top:-10px;clear:both}.m-3 .nbw-bitm .cited{margin-top:-15px;}.m-3 .nbw-bitm .rdif{line-height:24px;height:24px;}.m-3 .nbw-bitm .rdif .pnt{line-height:24px;height:24px;margin-right:10px;}.m-3 .nbw-bitm .rdif .pclass{vertical-align:middle;width:57px;height:22px;}.m-3 .nbw-bitm .rdif .rdct{display:inline-block;}.m-3 .snl .rdcnt{padding:5px;text-align:left}.m-3 .snl .rdcnt .nbw-fce{margin:0 5px}.m-3 .snl .rdcnt p{margin:10px 0}.m-3 .snl .rdcnt .rrb{list-style:none;height:22px;line-height:22px;}.m-3 .acts .iblock{width:18px;}.m-3 .ns{margin:0 0 0 2px;}.m-3 .cancel{display:none;}.m-3 .js-hover .cancel, .m-3 .follow:hover .cancel, .m-3 .frd:hover .cancel{display:inline;}.m-3 .follow{*margin-left:2px;}.m-3 .flw{padding:7px 8px;color:#000;background:#fefce4;border:1px solid #b7b7b7;}.m-3 .acts .flw .iblock{width:20px;}.m-3 .sntesctf{width:15px;margin-left:3px;}.dr-warm{width:420px;padding:12px 18px;margin:18px 0;line-height:20px;border:1px solid #aaa;color:#666;background:#ffffdc;}.dr-warm a,.dr-warm a:hover{text-decoration:underline;color:#02a;}.dr-warm .codeinput{width:70px;text-align:center;}.dr-warm .codediv{margin:10px 0 0;}.dr-warm .ml{margin:0px 10px;vertical-align:middle;}.dr-warm .button{background-color:#77716F;width:42px;height:20px;border:0 none;color:#fff;cursor:pointer;}.m-3 .commentcntwrap{position:relative;zoom:1;}.m-3 .cmtMultiUserRole{position:absolute;left:62px;bottom:5px;width:300px;overflow-x;hidden;}.m-3 .cmtMultiUserRole .selectRole{float:right;padding:1px 1px 0 1px;border:none;}.m-3 .cmtMultiUserRole .selectRole .ztxt{float:left;width:auto;overflow:hidden;}.m-3 .cmtMultiUserRole .selectRole .zdwn{float:left;background:url("/newpage/images/icon.png") -240px -420px no-repeat;text-indent:-9999px;}.m-3 .cmtMultiUserRole .selectRole .zlst .zitm{}.m-3 .cmtMultiUserRole .selectRole .zlst .zitm:hover, .m-3 .cmtMultiUserRole .selectRole .slst .item.js-zhvr-910{color:#333;background-color:#ececec;}.m-3 .nbw-cmt{position:static;}.m-3 .nbw-cmt .thde{position:relative;zoom:1;}.m-3 .publish .redt{position:relative;zoom:1;}.m-3 .publish .redt .cmtMultiUserRole{left:135px;_left:132px;}.m-3 .cmtMultiUserRole .js-showlist{padding:0;margin:0;border-style:solid;border-width:1px 1px 0 1px;border-color:#aaa;}.m-3 .cmtMultiUserRole .js-showlist .zlst{border-style:solid;border-width:0 1px 1px 1px;border-color:#aaa;}.m-3 .multiuserItem{}.m-3 .multiuserItem .author{margin-right:-50px;}.m-3 .multiuserItem .multicntwrap{padding:30px 0 20px 0;}.m-3 .multiuserItem .multicnt{_padding-top:2px;margin-left:50px;}.m-3 .nbw-ryt .left .multiuserItem .multicnt .title{width:95%;margin-top:0;margin-bottom:0;}.m-3 .nbw-ryt .left .multiuserItem .multicnt .tdep{margin-bottom:0;}.m-3 .attachment{margin-bottom:20px;}.m-3 .awidth{width:40px;}.m-3 .view{margin-right:10px;}.m-3 .nbw-cmt .op{height:18px;line-height:18px;}.m-3 .suggestedreading{overflow:hidden;position:relative;zoom:1;}.m-3 .suggestedreading .m-list{margin-left:0;padding-left:15px;overflow:hidden;font-size:14px;}.m-3 .suggestedreading .m-list .gap{margin-left:8px;color:#ADADAD;}.m-3 .suggestedreading .m-list li{height:20px;padding:3px 0 2px;vertical-align:middle;}.m-3 .suggestedreading .wrap li{float:left;width:118px;height:146px;}.m-3 .suggestedreading .suggesteditem1{line-height:24px;margin:5px 0;font-size:12px;margin-right:10px;}.m-3 .suggestedreading .suggesteditem2{margin:5px 0;font-size:12px;}.m-3 .suggestedreading .suggesteditem2 .imgwrap1{position:relative;overflow:hidden;width:90px;height:90px;zoom:1;}.m-3 .suggestedreading .suggesteditem2 .imgwrap2{z-index:2;position:absolute;left:0;top:0;}.m-3 .suggestedreading .suggesteditem2 .btitle{width:96px;height:148px;overflow:hidden;text-decoration:none;}.m-3 .suggestedreading .suggesteditem2 .sep{padding:5px 10px 0 10px;}.m-3 .suggestedreading .suggesteditem2 a{cursor:pointer;}.m-3 .suggestedreading .suggesteditem2 a:hover{text-decoration:none;}.m-3 .suggestedreading .suggesteditem2 img{border-width:0;}.m-3 .suggestedreading .color1{background-color:#B3786B;}.m-3 .suggestedreading .color2{background-color:#D2C1A8;}.m-3 .suggestedreading .color3{background-color:#D46646;}.m-3 .suggestedreading .color4{background-color:#D28FA8;}.m-3 .suggestedreading .color5{background-color:#C84F54;}.m-3 .suggestedreading .white{color:white;}.m-3 .suggestedreading .imgtip{margin:2px;font-weight:bold;color:white;font-size:13px;font-family:微软雅黑;}.m-3 .suggestedreading .borderwrap{padding:2px;background-color:#fff;}.m-3 .suggestedreading .time{position:absolute;bottom:0;right:0;}.m-3 .suggestedreading .hidsep{margin-left:-1px;}.m-3 .suggestedreading .srtitle{font-size:14px;font-weight:bold;margin-bottom:10px;}.m-3 #yodaoad{padding-left:5px;}.m-3 #yodaoad_3{padding:20px 0 25px 0;}.m-3 .relategroup{width:45%}.m-3 .blogvote{padding-left:35px;position:relative;zoom:1;}.m-3 .blogvote .sep{margin:0 5px;}.m-3 .blogvote .vtitle{margin:15px 0 15px -30px;}.m-3 .blogvote .vtitle span{padding-right:8px;}.m-3 .blogvote .vtitle .close{width:60px;height:24px;vertical-align:middle;}.m-3 .blogvote .roleview{padding-right:10px}.m-3 .blogvote .roleview .iblock{width:10px}.m-3 .blogvote .options{clear:both;margin-right:10px}.m-3 .blogvote .options ul{margin:0;padding:0;list-style:none;}.m-3 .blogvote .options ul li{padding:10px 0;line-height:16px;}.m-3 .blogvote .options .role{margin-bottom:15px;}.m-3 .blogvote .options .acts{margin-bottom:15px;height:24px;line-height:26px;}.m-3 .blogvote .options .acts .leftpt{height:24px;line-height:26px;}.m-3 .blogvote .options .acts .leftpt button{height:24px;line-height:18px;}.m-3 .blogvote .options .acts .leftpt span{}.m-3 .blogvote .options .acts .view{margin-left:5px;}.m-3 .blogvote .fvote{padding-top:10px;}.m-3 .blogvote .fvote ul{list-style:none;margin:10px 0;padding:0;}.m-3 .blogvote .fvote ul li{line-height:20px;margin:5px 0;}.m-3 .blogvote .options ul .col0{width:230px;margin-right:10px;margin-top:-3px;_margin-top:-5px;line-height:20px}.m-3 .blogvote .options ul .col0 input{_position:relative;_top:3px}.m-3 .blogvote .options ul .col0 label{width:200px;_position:relative;_top:4px}.m-3 .blogvote .options ul .col1{width:190px;height:14px;line-height:14px;;background:none repeat scroll 0 0 #EAEAEA;}.m-3 .blogvote .options ul .col1 .iblock{width:100%;height:16px;vertical-align:middle;}.qing001{margin:0;border:none;}.qing001 .nb-mc{background:none;}.qing001 .nb-mc .cc{width:942px;padding:0;margin:0 auto;}.qing001 .nb-mc .cl{display:none;}.qing001 .nb-mc .cr{display:none;}.qing001 .bh{display:none;}.qing001 .nbw-ryt{background:url(/newpage/images/qingtheme/qing001/blogdetail_cntbg.png) 0 0 repeat-y;}.qing001 .nbw-ryt .left{background:url(/newpage/images/qingtheme/qing001/blogdetail_ftbg.png) bottom left no-repeat;}.qing001 .nbw-ryt .left .lcnt{width:100%;padding:0;margin:0;background:url(/newpage/images/qingtheme/qing001/blogdetail_ttlbg.png) 0 0 no-repeat;}.qing001 .nbw-ryt .left .mcnt{padding:0 30px;}.qing001 .nbw-ryt .left .nbw-bitm{padding:0;}.qing001 .nb-mt{display:none;}.qing001 .nbw-ryt .left .top{display:none;}.qing001 .nbw-ryt .left .nbw-bitm .title{height:31px;padding:30px 0 46px 3px;margin:0;}.qing001 .nbw-ryt .left .nbw-bitm .title .tcnt{color:#fffadc;font-size:24px;font-family:'微软雅黑','黑体',Arial,Helvetica,Sans-Serif;}.qing001 .nbw-ryt .left .nbw-bitm .tdep{padding-top:6px;}.qing001 .comment .case{padding-bottom:40px;}.m-3 .article .douban{float:left;width:200px;margin:0 10px 10px 0;font-size:12px;}.m-3 .article .douban .field{padding-top:5px;}.m-3 .article .douban .field .dbyinyue{width:10px;height:8px;border-width:0;}.m-3 .article .douban img{max-width:100%;width:100%;border-color:#e9e9e9;display:inline-block;border-width:1px;border-style:solid;}.m-3 .article-1 .douban{float:right;width:200px;margin:0 3px 10px 10px;}.m-3 .article-2 .douban{float:left;width:250px;margin:0 -250px 0 0;}.m-3 .article-2 .blog{margin-left:270px;}.m-3 .article-2 .blogc{width:99%;overflow:hidden;}.m-3 .article-3 .douban{float:right;width:250px;margin:0 3px 0 -250px;}.m-3 .article-3 .blog{margin-right:270px;}.m-3 .article-3 .blogc{width:99%;overflow:hidden;}.m-3 .vote_star{overflow:visible;}.m-3 .rateword{display:none;left:88px;width:37px;top:-2px;position:absolute;line-height:23px;}.m-3 .star_d0 .rateword0{display:inline;}.m-3 .star_d1 .rateword1{display:inline;}.m-3 .star_d2 .rateword2{display:inline;}.m-3 .star_d3 .rateword3{display:inline;}.m-3 .star_d4 .rateword4{display:inline;}.m-3 .star_d5 .rateword5{display:inline;}.m-3 .nbw-act .blogsep{margin:0 2px}.m-3 .zihao{position:relative;cursor:default;}.m-3 .zihaoshow{position:absolute;width:26px;top:-57px;left:-3px;padding:0 0 3px;line-height:18px;}.m-3 .zihaoshow span{display:block;text-align:center;cursor:pointer;}.m-3 .zihaoc{border-style:solid;border-width:1px;}.m-3 .mbga{margin-bottom:12px;position:relative;}.m-3 .mbga a{margin-left:20px;}.m-3 .mbgai{position:absolute;top:-1px;width:17px;background:url(/newpage/images/microblog.png?1) no-repeat;_background:none transparent;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://b2.bst.126.net/newpage/images/microblog.png');_zoom:1;} </style>
+  
+  <link href="/newpage/prettycode/prettify.css" type="text/css" rel="stylesheet" />
+  </head>
+<body onload="prettyPrint()" id="blog-163-com" class="nb-body nb-inr nb-prv">
+  <!--[if lte IE 6]><div id="blog-163-com-ie6bodywrap" class=""><![endif]-->
+    <!--[if lte IE 6]><div id="blog-163-com-ie6body" class="nb-body"><![endif]-->
+
+<div class="nb-nbar clearfix" id="blog-163-com-topbar">
+  <div class="pl fl clearfix">
+  <div id=""" class="nbw-im fl im im0">
+    <a  rel="nofollow"  class="lbl bd ia noul " href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://www.163.com/" target="_blank" hidefocus="true"><span class="tx">网易</span><span class="iblock icn0 icn0-421">&nbsp;</span></a><div class="nbw-tcd box-shadow bd">
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://news.163.com/">
+            新闻
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://t.163.com/">
+            微博
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://email.163.com/">
+            邮箱
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://photo.163.com/">
+            相册
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://yuedu.163.com/">
+            阅读
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://www.youdao.com/">
+            有道
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://photo.163.com/pp/square/">
+            摄影
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://aipai.163.com?from=163blog">
+            爱拍
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://note.youdao.com/?vendor=163blog">
+            云笔记
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://fm.163.com/?fmblogzx0628">
+            闪电邮
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://m.123.163.com/?frombkcp">
+            手机邮
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://yxp.163.com/">
+            印像派
+          </a>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://hi.163.com/?from=bkcp">
+            游戏江湖
+          </a>
+        <div class="sep bd space">&nbsp;</div>
+          <a  rel="nofollow"    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/redirect.html?frompersonalbloghome&amp;url=http://sitemap.163.com/">
+            更多
+          </a>
+        
+    </div>
+  </div>
+                               
+    <span style="margin-left:0;" class="fl iblock space icn1 icn1-4">&nbsp;</span>
+    
+  <div id=""" class="nbw-im fl im im10">
+    <a  class="lbl bd ia noul " href="http://blog.163.com/?frompersonalbloghome" target="_blank" hidefocus="true"><span class="tx">博客</span><span class="iblock icn0 icn0-421">&nbsp;</span></a><div class="nbw-tcd box-shadow bd">
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/services/wapblog.html?frompersonalbloghome">
+            手机博客
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/clone/clone.html?frompersonalbloghome">
+            博客搬家
+          </a>
+          <a    class="itm noul youcai " target="_blank" hidefocus="true" href="http://blog.163.com/vip.do?frompersonalbloghome">
+            博客VIP服务
+          </a>
+        <div class="sep bd space">&nbsp;</div>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/blog_admin/blog/static/721279201082863728829/?frompersonalbloghome">
+            LiveWriter写博
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/blog_admin/blog/static/721279201092713253500/?frompersonalbloghome">
+            word写博
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/services/mailblog.html?frompersonalbloghome">
+            邮件写博
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/services/emsblog.html?frompersonalbloghome">
+            短信写博
+          </a>
+        <div class="sep bd space">&nbsp;</div>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/showMultiUser.do?frompersonalbloghome">
+            群博客
+          </a>
+          <a    class="itm noul youcai " target="_blank" hidefocus="true" href="http://blog.163.com/BLOG_YOUCAI/">
+            博客油菜地
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/ht/?frompersonalbloghome">
+            博客话题
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/hot/history/?frompersonalbloghome">
+            博客热点
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://q.163.com/#home?frompersonalbloghome">
+            博客圈子
+          </a>
+          <a    class="itm noul  " target="_blank" hidefocus="true" href="http://blog.163.com/findFriend.do?type=5?frompersonalbloghome">
+            找朋友
+          </a>
+        
+    </div>
+  </div>
+
+    
+    <div class="nbw-im fl im1 im explore"><a class="lbl bd ima spy" href="http://blog.163.com/public/explore/?frompersonalbloghome">发现</a></div>
+    <div class="nbw-im fl im1 im bloggroup"><a class="lbl bd ima spy" href="http://blog.163.com/g/?frompersonalbloghome">小组</a></div>
+    <div class="nbw-im fl im1 im customtheme"><a class="lbl bd ima spy" href="http://blog.163.com/public/theme/?frompersonalbloghome">风格</a></div>
+    <div class="nbw-im fl im1 im seebyway"><a rel="nofollow" title="随便看看" class="lbl bd ima spy" href="http://blog.163.com/randomUser.do">&nbsp;</a></div>
+    
+    <span class="fl iblock space icn1 icn1-4">&nbsp;</span>
+    <div id="topbar_randShowArea" class="fl">
+      <div class="nbw-im fl im1 im randtag phide"><a style="width:110px" target="_blank" class="lbl bd ima moveblog randshow" href="http://www.lofter.com/" onclick="window.open('http://www.lofter.com/reg?from=blog');return false;">网易轻博客LOFTER</a></div>
+    </div>
+  </div>
+  <div class="fr pr clearfix">
+    <div id="topbar_loginAndReg" class="fr">
+      <a rel="nofollow" style="margin-left:10px;color:#ff7700;" class="iblock fr ima" href="http://reg.163.com/reg/reg.jsp?product=blog&url=http://blog.163.com/ntesRegBlank.html&loginurl=http://blog.163.com/" target="_blank">创建博客</a>
+      <a rel="nofollow" class="iblock fr ima ztag" href="#">登录</a>
+      <span class="fr iblock space icn1 icn1-4 spx">&nbsp;</span>
+      <div id="topbar_followArea" class="nbw-im fr"><span class="lbl bd ima followit fl ztag"><span class="fl addicon">&nbsp;</span><span class="fl">关注</span></span></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  (function(){
+      var e = document.getElementById('blog-163-com-main');
+      if(!!e) e.parentNode.insertBefore(document.getElementById('blog-163-com-topbar'),e);
+      e = document.getElementById('blog-notice-email');
+      if(!!e) window.setTimeout(function(){e.style.display='';},50);
+  })()
+</script>
+<div class="blogtoptips phide" id="blog-163-com-toptips">
+ <div class="blogtoptipswrap">
+    <div id="newbulletinstip" class="newbulletinstip phide">
+    <a class="lnknews fc03 m2a tiptag phide" href="" target="_blank"></a><span class="txtnews tiptag phide"></span>&nbsp;&nbsp;&nbsp;<a class="fc03 ul nextorprevnews tiptag phide" href="" hidefocus="true">显示下一条</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a class="fc03 ul close tiptag" href="" hidefocus="true">关闭</a>
+  </div>
+ </div>
+    <div id="$_faxiantip" class="faxiantip phide">
+      <div>
+	    <a class="m2a iblock" href="http://blog.163.com/public/explore/?fromblogbanner" target="_blank"></a>
+	    <span class="faxiantag m2a"></span>
+      </div>
+    </div>
+    <div id="$_guanggaotip" class="guanggaotip phide">
+      <div>
+	    
+	    <span class="guanggaotag m2a"></span>
+      </div>
+    </div>
+    <div id="$_lofterInviteTip" class="lofterInviteTip phide">
+      <div>
+	    <a class="m2a iblock" href="http://www.lofter.com/invite/163blog/?email=" target="_blank"></a>
+	    <span class="lofterInviteTag m2a"></span>
+      </div>
+    </div>
+</div>  <div class="nb-wrap wsy" id="blog-163-com-main"><div class="nb-are nb-top">
+  <div class="wkg h" id="blog-163-com-banner">
+    
+    <div class="t">
+      <h1 class="n c"><span class="ztag pre">fanhq666的博客</span></h1>
+      <p class="d c"><span class="ztag pre">Fan-Fun</span></p>
+    </div>
+    <div class="f h ztag"></div>
+    <a class="x" hidefocus="true" target="_blank" href="#"><span class="xx ztag"></span></a>
+  </div>
+</div><div class="nb-are nb-nav">
+  <div class="wkg">
+    <div class="c h">
+      <h2>导航</h2>
+      <ul class="noul clearfix">
+                
+	        <li class="w w0">
+	          <a class="i i0 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/">首页</a>
+	        </li>
+	        <li class="w w1 selected">
+	          <a class="i i1 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/blog/">日志</a>
+	        </li>
+	        <li class="w w2">
+	          <a class="i i2 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/album/">相册</a>
+	        </li>
+	        <li class="w w3">
+	          <a class="i i3 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/music/">音乐</a>
+	        </li>
+	        <li class="w w4">
+	          <a class="i i4 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/collection/">收藏</a>
+	        </li>
+	        <li class="w w5">
+	          <a class="i i5 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/friends/">博友</a>
+	        </li>
+	        <li class="w w6">
+	          <a class="i i6 fc01 h" hidefocus="true" href="http://fanhq666.blog.163.com/profile/">关于我</a>
+	        </li>
+      </ul><!--
+ --></div>
+    <div class="l h">&nbsp;</div>
+    <div class="r h">&nbsp;</div>
+  </div>
+</div>  <div class="nb-are nb-smt"><div class="wkg h space"><div class="l h">&nbsp;</div><div class="r h">&nbsp;</div><div class="c h">&nbsp;</div></div></div>
+  <div class="nb-are nb-cnt">
+    <div class="wkg">
+      <div class="c wc h clearfix " id="blog-163-com-container">
+  <div class="nb-mdl lcr m-3 " id="-3">
+  <div class="nb-mt lcr th fc02">
+    <div class="c tc th lcr"><h2 class="thide nb-jsc mdl_t_t">日志</h2></div>
+    <div class="r tm th nb-jsc"></div>
+    <div class="l tl th">&nbsp;</div>
+    <div class="r tr th">&nbsp;</div>
+  </div>
+    <div class="nb-mc lcr">
+      <div class="c cc lcr nb-jsc"><script>
+function g_onSuggestedReadingImgLoad(_img){
+    var image = new Image();
+    image.src = _img.src;
+    var _width = 90;
+    var _height = 90;
+    if(image.width > image.height){
+    	_img.style.marginLeft = -Math.floor((image.width*(_height/image.height)-_width)/2)+'px';
+    	_img.style.height = _height+'px';
+    }else {
+    	_img.style.width = _width+'px';
+    	_img.style.marginTop = -Math.floor((image.height*(_width/image.width)-_height)/2)+'px';
+    }
+    _img.style.display = 'block';
+}
+</script>
+<div class="nbw-ryt ztag clearfix ">
+  <div class="right bdwl bds0 bdc0"><div class="cnt ztag"></div></div>
+  <div class="left">
+     <div class="lcnt bdwr bds0 bdc0 ">   
+      <div id="$_divTopLink" class='top fc03 bdwb bdc0 bds2 clearfix'>
+        <span class="ilft iblock icn0 icn0-620">&nbsp;</span>
+        <div class="pleft thide"><a class="m2a"  href="http://fanhq666.blog.163.com/blog/static/819434262011058722460/">测试:chrome执行javascript有多快?</a></div>
+        <span class="irgt iblock icn0 icn0-619">&nbsp;</span>
+        <div class="pright thide"><a class="m2a" href="http://fanhq666.blog.163.com/blog/static/8194342620111215539865/">有关操作系统的纠结事</a></div>
+     </div> 
+     <div class="mcnt ztag"> 
+      <div class="nbw-bitm bdwb bds2 bdc0 ">
+        <div class="multicntwrap">
+	      <div class="multicnt">
+	      	<div>
+		      <h3 class="title pre fs1"><span class="tcnt">挖掘Treap的潜力</span>&nbsp;&nbsp;<span class="bgc0 fc07 fw0 fs0"></span></h3>
+		      <p class="tdep clearfix nbw-act fc06" style="line-height:20px;">
+		        <span class="pleft">
+		          
+		          <span class="blogsep">2011-01-21 22:59:33</span><span class="blogsep">|&nbsp;&nbsp;分类：</span>
+		          <a class="fc03 m2a" href="http://fanhq666.blog.163.com/blog/#m=0&t=1&c=fks_087067087083082066081086080095092087088071087082084069" title="程序">程序</a>
+		          <span class="blogsep phide" id="$_blogTagTitle">|&nbsp;&nbsp;标签：</span><span class="fc03 phide" id="$_blogTagInfo"></span>
+		        </span>
+		        <span class="pright fc07 ztag"><span class="blogsep">|</span><span class="zihao fc03" id="$_fontswitch">字号<span class="zihaoshow  phide" id="$_fontsTypes"><span class="zihaoc bdc0"><span class="stag"></span><span class="fc04 stag">大</span><span  class="fc04 stag" >中</span><span  class="fc04 stag">小</span></span></span></span></span><span class="pright pnt fc03" id="$_blog_subscribe"><span class="iblock icn0 icn0-919">&nbsp;</span><a class="m2a">订阅</a></span>
+		      </p>
+		    </div>
+	      </div>
+        </div>
+        
+        <div>
+        
+        </div>
+        
+        <div class="nbw-blog-start"></div>
+        <div class="bct fc05 fc11 nbw-blog ztag">你的Treap能支持以下操作吗？<wbr><div>1.区间增减</div><div>2.区间求最小</div><div>3.区间反转（倒序）</div><div>4.区间移动（把一段剪切、粘贴）</div><div>不能？只能用splay？</div><div><br></div><div>其实，Treap也可以办到。</div><div>方法就是：设计把一个子树split成两个子树的算法，以及把两个子树merge的算法。</div><div><br></div><div>例：poj3580，代码见最后</div><div><br></div><div>另外一个应用：可持久化Treap</div><div>设计一个数据结构维护一个序列</div><div>&nbsp;插入一个元素</div><div>&nbsp;删除一个元素</div><div>&nbsp;移动连续的一段（就是剪切、粘贴）</div><div>&nbsp;＊查询m次操作之前的第p个元素是谁</div><div>例：超级文本编辑器（我正在构思的一道题）</div><div>文本长度不超过100000</div><div>每次可以插入、删除、剪切粘贴</div><div>要求在线算法</div><div>每个操作10微秒时限，一共32M内存</div><div><br></div><div>这个可以参见算法导论，核心思想是：一个节点创建之后就不再删除。另外用垃圾回收。</div><div><br></div><div>poj3580</div><div><div>#include &lt;cstdio&gt;</div><div>#include &lt;algorithm&gt;</div><div>using namespace std;</div><div>int ran(){</div><div><span style="white-space:pre;">	</span>static int x=1364684679;</div><div><span style="white-space:pre;">	</span>x+=(x&lt;&lt;2)+1;</div><div><span style="white-space:pre;">	</span>return x;</div><div>}</div><div>struct node{</div><div><span style="white-space:pre;">	</span>int k,mn,delta,mark,w,sz;</div><div><span style="white-space:pre;">	</span>node *l,*r;</div><div><span style="white-space:pre;">	</span>static node* getnew(node *w=NULL){</div><div><span style="white-space:pre;">		</span>static node *list=NULL;</div><div><span style="white-space:pre;">		</span>if (w){</div><div><span style="white-space:pre;">			</span>w-&gt;r=list;list=w;</div><div><span style="white-space:pre;">			</span>return NULL;</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>if (!list){</div><div><span style="white-space:pre;">			</span>node *q=new node[10000];</div><div><span style="white-space:pre;">			</span>for (int i=0;i&lt;10000;i++){</div><div><span style="white-space:pre;">				</span>q[i].w=ran();</div><div><span style="white-space:pre;">				</span>q[i].r=list;list=q+i;</div><div><span style="white-space:pre;">			</span>}</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>node *p=list;list=list-&gt;r;</div><div><span style="white-space:pre;">		</span>p-&gt;l=p-&gt;r=NULL;p-&gt;delta=p-&gt;mark=0;</div><div><span style="white-space:pre;">		</span>return p;</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>void down(){</div><div><span style="white-space:pre;">		</span>if (mark){</div><div><span style="white-space:pre;">			</span>if (l)swap(l-&gt;l,l-&gt;r),l-&gt;mark^=1;</div><div><span style="white-space:pre;">			</span>if (r)swap(r-&gt;l,r-&gt;r),r-&gt;mark^=1;</div><div><span style="white-space:pre;">			</span>mark=0;</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>if (delta){</div><div><span style="white-space:pre;">			</span>if (l)l-&gt;mn+=delta,l-&gt;delta+=delta,l-&gt;k+=delta;</div><div><span style="white-space:pre;">			</span>if (r)r-&gt;mn+=delta,r-&gt;delta+=delta,r-&gt;k+=delta;</div><div><span style="white-space:pre;">			</span>delta=0;</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>void update(){</div><div><span style="white-space:pre;">		</span>mn=k;</div><div><span style="white-space:pre;">		</span>if (l &amp;&amp; mn&gt;l-&gt;mn+delta)mn=l-&gt;mn+delta;</div><div><span style="white-space:pre;">		</span>if (r &amp;&amp; mn&gt;r-&gt;mn+delta)mn=r-&gt;mn+delta;</div><div><span style="white-space:pre;">		</span>sz=1;</div><div><span style="white-space:pre;">		</span>if (l)sz+=l-&gt;sz;</div><div><span style="white-space:pre;">		</span>if (r)sz+=r-&gt;sz;</div><div><span style="white-space:pre;">	</span>}</div><div>};</div><div>#define SIZE(_) ((_)?(_)-&gt;sz:0)</div><div>struct Treap{</div><div><span style="white-space:pre;">	</span>node *root;</div><div><span style="white-space:pre;">	</span>Treap(){root=NULL;}</div><div><span style="white-space:pre;">	</span>void ins(node *&amp;p,int a,int k){</div><div><span style="white-space:pre;">		</span>if (!p){</div><div><span style="white-space:pre;">			</span>p=node::getnew();</div><div><span style="white-space:pre;">			</span>p-&gt;k=p-&gt;mn=k;p-&gt;sz=1;</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>p-&gt;down();</div><div><span style="white-space:pre;">			</span>if (SIZE(p-&gt;l)&gt;=a){</div><div><span style="white-space:pre;">				</span>ins(p-&gt;l,a,k);</div><div><span style="white-space:pre;">				</span>node *q=p-&gt;l;</div><div><span style="white-space:pre;">				</span>if (q-&gt;w&lt;p-&gt;w){</div><div><span style="white-space:pre;">					</span>q-&gt;down();</div><div><span style="white-space:pre;">					</span>p-&gt;l=q-&gt;r;q-&gt;r=p;p=q;</div><div><span style="white-space:pre;">					</span>p-&gt;r-&gt;update();</div><div><span style="white-space:pre;">				</span>}</div><div><span style="white-space:pre;">			</span>}else{</div><div><span style="white-space:pre;">				</span>ins(p-&gt;r,a-SIZE(p-&gt;l)-1,k);</div><div><span style="white-space:pre;">				</span>node *q=p-&gt;r;</div><div><span style="white-space:pre;">				</span>if (q-&gt;w&lt;p-&gt;w){</div><div><span style="white-space:pre;">					</span>q-&gt;down();</div><div><span style="white-space:pre;">					</span>p-&gt;r=q-&gt;l;q-&gt;l=p;p=q;</div><div><span style="white-space:pre;">					</span>p-&gt;l-&gt;update();</div><div><span style="white-space:pre;">				</span>}</div><div><span style="white-space:pre;">			</span>}</div><div><span style="white-space:pre;">			</span>p-&gt;update();</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>void ins(int a,int k){ins(root,a,k);}</div><div><span style="white-space:pre;">	</span>static void merge(node *&amp;p,node *x,node *y){</div><div><span style="white-space:pre;">		</span>if (!x || !y){</div><div><span style="white-space:pre;">			</span>p=x?x:y;</div><div><span style="white-space:pre;">		</span>}else if (x-&gt;w&lt;y-&gt;w){</div><div><span style="white-space:pre;">			</span>x-&gt;down();</div><div><span style="white-space:pre;">			</span>merge(x-&gt;r,x-&gt;r,y);</div><div><span style="white-space:pre;">			</span>x-&gt;update();</div><div><span style="white-space:pre;">			</span>p=x;</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>y-&gt;down();</div><div><span style="white-space:pre;">			</span>merge(y-&gt;l,x,y-&gt;l);</div><div><span style="white-space:pre;">			</span>y-&gt;update();</div><div><span style="white-space:pre;">			</span>p=y;</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>void del(node *&amp;p,int a){</div><div><span style="white-space:pre;">		</span>p-&gt;down();</div><div><span style="white-space:pre;">		</span>if (SIZE(p-&gt;l)==a){</div><div><span style="white-space:pre;">			</span>node *q=p;</div><div><span style="white-space:pre;">			</span>merge(p,p-&gt;l,p-&gt;r);</div><div><span style="white-space:pre;">			</span>node::getnew(q);</div><div><span style="white-space:pre;">		</span>}else if (SIZE(p-&gt;l)&gt;a){</div><div><span style="white-space:pre;">			</span>del(p-&gt;l,a);</div><div><span style="white-space:pre;">			</span>p-&gt;update();</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>del(p-&gt;r,a-SIZE(p-&gt;l)-1);</div><div><span style="white-space:pre;">			</span>p-&gt;update();</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>void del(int a){del(root,a);}</div><div><span style="white-space:pre;">	</span>static void cut(node *p,node *&amp;x,node *&amp;y,int a){</div><div><span style="white-space:pre;">		</span>if (a==0){</div><div><span style="white-space:pre;">			</span>x=NULL;y=p;</div><div><span style="white-space:pre;">		</span>}else if (a==SIZE(p)){</div><div><span style="white-space:pre;">			</span>x=p;y=NULL;</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>p-&gt;down();</div><div><span style="white-space:pre;">			</span>if (SIZE(p-&gt;l)&gt;=a){</div><div><span style="white-space:pre;">				</span>y=p;</div><div><span style="white-space:pre;">				</span>cut(p-&gt;l,x,y-&gt;l,a);</div><div><span style="white-space:pre;">				</span>y-&gt;update();</div><div><span style="white-space:pre;">			</span>}else{</div><div><span style="white-space:pre;">				</span>x=p;</div><div><span style="white-space:pre;">				</span>cut(p-&gt;r,x-&gt;r,y,a-SIZE(p-&gt;l)-1);</div><div><span style="white-space:pre;">				</span>x-&gt;update();</div><div><span style="white-space:pre;">			</span>}</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>int ask(node *p,int a,int b){</div><div><span style="white-space:pre;">		</span>if (a==0 &amp;&amp; b==SIZE(p)-1)return p-&gt;mn;</div><div><span style="white-space:pre;">		</span>p-&gt;down();</div><div><span style="white-space:pre;">		</span>int u=SIZE(p-&gt;l);</div><div><span style="white-space:pre;">		</span>int r=(a&lt;=u &amp;&amp; u&lt;=b?p-&gt;k:~0u&gt;&gt;1);</div><div><span style="white-space:pre;">		</span>if (a&lt;u)r=min(r,ask(p-&gt;l,a,b&gt;=u?u-1:b));</div><div><span style="white-space:pre;">		</span>if (b&gt;u)r=min(r,ask(p-&gt;r,a&lt;=u?0:a-u-1,b-u-1));</div><div><span style="white-space:pre;">		</span>return r;</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>int ask(int a,int b){return ask(root,a,b);}</div><div><span style="white-space:pre;">	</span>void dfs(node *p,int lv){</div><div><span style="white-space:pre;">		</span>if (p){</div><div><span style="white-space:pre;">			</span>dfs(p-&gt;l,lv+1);</div><div><span style="white-space:pre;">			</span>for (int i=0;i&lt;lv;i++)putchar(' '),putchar(' ');</div><div><span style="white-space:pre;">			</span>printf("%d %d %d %d %d\n",p-&gt;k,p-&gt;sz,p-&gt;mn,p-&gt;delta,p-&gt;mark);</div><div><span style="white-space:pre;">			</span>dfs(p-&gt;r,lv+1);</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>void dfs(){dfs(root,0);puts("");}</div><div>}T;</div><div>void Ins(int a,int k){</div><div><span style="white-space:pre;">	</span>//printf("ins %d %d\n",a,k);</div><div><span style="white-space:pre;">	</span>T.ins(a,k);</div><div>}</div><div>void Del(int a){</div><div><span style="white-space:pre;">	</span>//printf("del %d\n",a);</div><div><span style="white-space:pre;">	</span>T.del(a);</div><div>}</div><div>void Revolve(int a,int b,int c){</div><div><span style="white-space:pre;">	</span>//printf("revolve %d %d %d\n",a,b,c);</div><div><span style="white-space:pre;">	</span>node *p,*q,*r,*s;</div><div><span style="white-space:pre;">	</span>Treap::cut(T.root,p,q,a);</div><div><span style="white-space:pre;">	</span>Treap::cut(q,q,r,b-a+1);</div><div><span style="white-space:pre;">	</span>Treap::cut(r,r,s,c-b);</div><div><span style="white-space:pre;">	</span>Treap::merge(p,p,r);</div><div><span style="white-space:pre;">	</span>Treap::merge(p,p,q);</div><div><span style="white-space:pre;">	</span>Treap::merge(T.root,p,s);</div><div>}</div><div>void Reverse(int a,int b){</div><div><span style="white-space:pre;">	</span>//printf("reverse %d %d\n",a,b);</div><div><span style="white-space:pre;">	</span>node *p,*q,*r;</div><div><span style="white-space:pre;">	</span>Treap::cut(T.root,p,q,a);</div><div><span style="white-space:pre;">	</span>Treap::cut(q,q,r,b-a+1);</div><div><span style="white-space:pre;">	</span>q-&gt;mark^=1;swap(q-&gt;l,q-&gt;r);</div><div><span style="white-space:pre;">	</span>Treap::merge(p,p,q);</div><div><span style="white-space:pre;">	</span>Treap::merge(T.root,p,r);</div><div>}</div><div>void Add(int a,int b,int c){</div><div><span style="white-space:pre;">	</span>//printf("add %d %d %d\n",a,b,c);</div><div><span style="white-space:pre;">	</span>node *p,*q,*r;</div><div><span style="white-space:pre;">	</span>Treap::cut(T.root,p,q,a);</div><div><span style="white-space:pre;">	</span>Treap::cut(q,q,r,b-a+1);</div><div><span style="white-space:pre;">	</span>//T.dfs(q,0);puts("");</div><div><span style="white-space:pre;">	</span>q-&gt;k+=c;q-&gt;mn+=c;q-&gt;delta+=c;</div><div><span style="white-space:pre;">	</span>//printf("c=%d\n",c);</div><div><span style="white-space:pre;">	</span>//T.dfs(q,0);</div><div><span style="white-space:pre;">	</span>//puts("");</div><div><span style="white-space:pre;">	</span>Treap::merge(p,p,q);</div><div><span style="white-space:pre;">	</span>Treap::merge(T.root,p,r);</div><div>}</div><div>int Ask(int a,int b){</div><div><span style="white-space:pre;">	</span>//printf("ask %d %d\n",a,b);</div><div><span style="white-space:pre;">	</span>return T.ask(a,b);</div><div>}</div><div>int main()</div><div>{</div><div><span style="white-space:pre;">	</span>int N;</div><div><span style="white-space:pre;">	</span>scanf("%d",&amp;N);</div><div><span style="white-space:pre;">	</span>for (int i=0;i&lt;N;i++){</div><div><span style="white-space:pre;">		</span>int x;</div><div><span style="white-space:pre;">		</span>scanf("%d",&amp;x);</div><div><span style="white-space:pre;">		</span>Ins(i,x);</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>int M;</div><div><span style="white-space:pre;">	</span>//T.dfs();</div><div><span style="white-space:pre;">	</span>scanf("%d",&amp;M);</div><div><span style="white-space:pre;">	</span>char buf[100];</div><div><span style="white-space:pre;">	</span>while (M--){</div><div><span style="white-space:pre;">		</span>scanf("%s",buf);</div><div><span style="white-space:pre;">		</span>if (buf[0]=='A'){</div><div><span style="white-space:pre;">			</span>int x,y,d;</div><div><span style="white-space:pre;">			</span>scanf("%d%d%d",&amp;x,&amp;y,&amp;d);x--;y--;</div><div><span style="white-space:pre;">			</span>Add(x,y,d);</div><div><span style="white-space:pre;">			</span>//T.dfs();</div><div><span style="white-space:pre;">		</span>}else if (buf[0]=='I'){</div><div><span style="white-space:pre;">			</span>int x,y;</div><div><span style="white-space:pre;">			</span>scanf("%d%d",&amp;x,&amp;y);</div><div><span style="white-space:pre;">			</span>Ins(x,y);</div><div><span style="white-space:pre;">		</span>}else if (buf[0]=='D'){</div><div><span style="white-space:pre;">			</span>int x;</div><div><span style="white-space:pre;">			</span>scanf("%d",&amp;x);x--;</div><div><span style="white-space:pre;">			</span>Del(x);</div><div><span style="white-space:pre;">		</span>}else if (buf[0]=='M'){</div><div><span style="white-space:pre;">			</span>int x,y;</div><div><span style="white-space:pre;">			</span>scanf("%d%d",&amp;x,&amp;y);x--;y--;</div><div><span style="white-space:pre;">			</span>printf("%d\n",Ask(x,y));</div><div><span style="white-space:pre;">		</span>}else if (buf[3]=='E'){</div><div><span style="white-space:pre;">			</span>int x,y;</div><div><span style="white-space:pre;">			</span>scanf("%d%d",&amp;x,&amp;y);x--;y--;</div><div><span style="white-space:pre;">			</span>Reverse(x,y);</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>int x,y,t;</div><div><span style="white-space:pre;">			</span>scanf("%d%d%d",&amp;x,&amp;y,&amp;t);x--;y--;</div><div><span style="white-space:pre;">			</span>t%=(y-x+1);</div><div><span style="white-space:pre;">			</span>t+=(y-x+1);</div><div><span style="white-space:pre;">			</span>t%=(y-x+1);</div><div><span style="white-space:pre;">			</span>if (t){</div><div><span style="white-space:pre;">				</span>Revolve(x,y-t,y);</div><div><span style="white-space:pre;">			</span>}</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>return 0;</div><div>}</div></div><div><br></div><div>文本编辑器</div><div><div>#include &lt;cstdio&gt;</div><div>#include &lt;bits/stl_pair.h&gt;</div><div>#include &lt;queue&gt;</div><div>#include &lt;deque&gt;</div><div>#include &lt;algorithm&gt;</div><div>using namespace std;</div><div>int ran(){</div><div><span style="white-space:pre;">	</span>static int x=222313214;</div><div><span style="white-space:pre;">	</span>x+=(x&lt;&lt;2)+1;</div><div><span style="white-space:pre;">	</span>return x;</div><div>}</div><div>struct node{</div><div><span style="white-space:pre;">	</span>int w,sz;</div><div><span style="white-space:pre;">	</span>char k;</div><div><span style="white-space:pre;">	</span>node *l,*r;</div><div><span style="white-space:pre;">	</span>static node* getnew(node *p=NULL){</div><div><span style="white-space:pre;">		</span>static node * list=NULL;</div><div><span style="white-space:pre;">		</span>if (p){</div><div><span style="white-space:pre;">			</span>p-&gt;w=ran();</div><div><span style="white-space:pre;">			</span>p-&gt;r=list;list=p;</div><div><span style="white-space:pre;">			</span>return NULL;</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>if (!list){</div><div><span style="white-space:pre;">			</span>node *p=new node[10000];</div><div><span style="white-space:pre;">			</span>for (int i=0;i&lt;10000;i++){</div><div><span style="white-space:pre;">				</span>p[i].r=list;list=p+i;</div><div><span style="white-space:pre;">				</span>p[i].w=ran();</div><div><span style="white-space:pre;">			</span>}</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>node *q=list;</div><div><span style="white-space:pre;">		</span>list=list-&gt;r;</div><div><span style="white-space:pre;">		</span>q-&gt;l=NULL;q-&gt;r=NULL;q-&gt;sz=1;</div><div><span style="white-space:pre;">		</span>return q;</div><div><span style="white-space:pre;">	</span>}</div><div>};</div><div>#define SIZE(_) ((_)?(_)-&gt;sz:0)</div><div>int M,curid;</div><div>queue&lt;pair&lt;int,node*&gt; &gt; Literbox;</div><div>deque&lt;node*&gt; Roots;</div><div>void giveback(node *p){</div><div><span style="white-space:pre;">	</span>Literbox.push(make_pair(curid,p));</div><div>}</div><div>void dfs(node *p,int a,int b){</div><div><span style="white-space:pre;">	</span>if (p){</div><div><span style="white-space:pre;">		</span>int u=SIZE(p-&gt;l);</div><div><span style="white-space:pre;">		</span>if (u&gt;a)dfs(p-&gt;l,a,min(b,u-1));</div><div><span style="white-space:pre;">		</span>if (a&lt;=u &amp;&amp; u&lt;=b)putchar(p-&gt;k);</div><div><span style="white-space:pre;">		</span>if (b&gt;u)dfs(p-&gt;r,max(a-u-1,0),b-u-1);</div><div><span style="white-space:pre;">	</span>}</div><div>}</div><div>node * combine(node *p,node *q){</div><div><span style="white-space:pre;">	</span>if (!p || !q)return p?p:q;</div><div><span style="white-space:pre;">	</span>if (p-&gt;w&lt;q-&gt;w){</div><div><span style="white-space:pre;">		</span>node *a=node::getnew();</div><div><span style="white-space:pre;">		</span>a-&gt;k=p-&gt;k;</div><div><span style="white-space:pre;">		</span>a-&gt;w=p-&gt;w;</div><div><span style="white-space:pre;">		</span>a-&gt;sz=p-&gt;sz+q-&gt;sz;</div><div><span style="white-space:pre;">		</span>a-&gt;l=p-&gt;l;</div><div><span style="white-space:pre;">		</span>a-&gt;r=combine(p-&gt;r,q);</div><div><span style="white-space:pre;">		</span>giveback(p);</div><div><span style="white-space:pre;">		</span>return a;</div><div><span style="white-space:pre;">	</span>}else{</div><div><span style="white-space:pre;">		</span>node *a=node::getnew();</div><div><span style="white-space:pre;">		</span>a-&gt;k=q-&gt;k;</div><div><span style="white-space:pre;">		</span>a-&gt;w=q-&gt;w;</div><div><span style="white-space:pre;">		</span>a-&gt;sz=p-&gt;sz+q-&gt;sz;</div><div><span style="white-space:pre;">		</span>a-&gt;r=q-&gt;r;</div><div><span style="white-space:pre;">		</span>a-&gt;l=combine(p,q-&gt;l);</div><div><span style="white-space:pre;">		</span>giveback(q);</div><div><span style="white-space:pre;">		</span>return a;</div><div><span style="white-space:pre;">	</span>}</div><div>}</div><div>void cutdown(node *p,node *&amp;x,node *&amp;y,int a){</div><div><span style="white-space:pre;">	</span>if (a==0)x=NULL,y=p;</div><div><span style="white-space:pre;">	</span>else if (a==SIZE(p)){</div><div><span style="white-space:pre;">		</span>x=p;y=NULL;</div><div><span style="white-space:pre;">	</span>}else{</div><div><span style="white-space:pre;">		</span>if (SIZE(p-&gt;l)+1&lt;=a){</div><div><span style="white-space:pre;">			</span>x=node::getnew();</div><div><span style="white-space:pre;">			</span>x-&gt;k=p-&gt;k;x-&gt;w=p-&gt;w;</div><div><span style="white-space:pre;">			</span>x-&gt;sz=a;</div><div><span style="white-space:pre;">			</span>x-&gt;l=p-&gt;l;</div><div><span style="white-space:pre;">			</span>cutdown(p-&gt;r,x-&gt;r,y,a-SIZE(p-&gt;l)-1);</div><div><span style="white-space:pre;">			</span>giveback(p);</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>y=node::getnew();</div><div><span style="white-space:pre;">			</span>y-&gt;k=p-&gt;k;y-&gt;w=p-&gt;w;</div><div><span style="white-space:pre;">			</span>y-&gt;sz=p-&gt;sz-a;</div><div><span style="white-space:pre;">			</span>y-&gt;r=p-&gt;r;</div><div><span style="white-space:pre;">			</span>cutdown(p-&gt;l,x,y-&gt;l,a);</div><div><span style="white-space:pre;">			</span>giveback(p);</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div>}</div><div>void treeadd(node *&amp;p,node *q){</div><div><span style="white-space:pre;">	</span>if (!p){</div><div><span style="white-space:pre;">		</span>p=q;</div><div><span style="white-space:pre;">	</span>}else{</div><div><span style="white-space:pre;">		</span>if (p-&gt;w&lt;q-&gt;w){</div><div><span style="white-space:pre;">			</span>treeadd(p-&gt;r,q);</div><div><span style="white-space:pre;">			</span>p-&gt;sz++;</div><div><span style="white-space:pre;">		</span>}else{</div><div><span style="white-space:pre;">			</span>q-&gt;l=p;q-&gt;sz=p-&gt;sz+1;</div><div><span style="white-space:pre;">			</span>p=q;</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">	</span>}</div><div>}</div><div>void Insert(int i,char a){</div><div><span style="white-space:pre;">	</span>node *p=node::getnew();</div><div><span style="white-space:pre;">	</span>p-&gt;k=a;</div><div><span style="white-space:pre;">	</span>node *x,*y;</div><div><span style="white-space:pre;">	</span>cutdown(Roots.back(),x,y,i);</div><div><span style="white-space:pre;">	</span>x=combine(x,p);x=combine(x,y);</div><div><span style="white-space:pre;">	</span>Roots.push_back(x);</div><div><span style="white-space:pre;">	</span>curid++;</div><div>}</div><div>void Delete(int i){</div><div><span style="white-space:pre;">	</span>node *x,*y,*z;</div><div><span style="white-space:pre;">	</span>cutdown(Roots.back(),x,y,i);</div><div><span style="white-space:pre;">	</span>cutdown(y,y,z,1);</div><div><span style="white-space:pre;">	</span>giveback(y);</div><div><span style="white-space:pre;">	</span>x=combine(x,z);</div><div><span style="white-space:pre;">	</span>Roots.push_back(x);</div><div><span style="white-space:pre;">	</span>curid++;</div><div>}</div><div>void Revolve(int a,int b,int c){</div><div><span style="white-space:pre;">	</span>node *p,*q,*r,*s;</div><div><span style="white-space:pre;">	</span>cutdown(Roots.back(),p,q,a);</div><div><span style="white-space:pre;">	</span>cutdown(q,q,r,b-a+1);</div><div><span style="white-space:pre;">	</span>cutdown(r,r,s,c-b);</div><div><span style="white-space:pre;">	</span>p=combine(p,r);</div><div><span style="white-space:pre;">	</span>p=combine(p,q);</div><div><span style="white-space:pre;">	</span>p=combine(p,s);</div><div><span style="white-space:pre;">	</span>Roots.push_back(p);</div><div><span style="white-space:pre;">	</span>curid++;</div><div>}</div><div>void Print(int a,int x,int y){</div><div><span style="white-space:pre;">	</span>node *p=Roots.at(Roots.size()-1-a);</div><div><span style="white-space:pre;">	</span>dfs(p,x,y);</div><div><span style="white-space:pre;">	</span>puts("");</div><div>}</div><div>void readstr(vector&lt;char&gt; &amp;a){</div><div><span style="white-space:pre;">	</span>char c;</div><div><span style="white-space:pre;">	</span>while (c=getchar(),c==10 || c==13 || c==' ');</div><div><span style="white-space:pre;">	</span>while (c!=10 &amp;&amp; c!=13){</div><div><span style="white-space:pre;">		</span>a.push_back(c);</div><div><span style="white-space:pre;">		</span>c=getchar();</div><div><span style="white-space:pre;">	</span>}</div><div>}</div><div>int main()</div><div>{</div><div><span style="white-space:pre;">	</span>scanf("%d",&amp;M);</div><div><span style="white-space:pre;">	</span>vector&lt;char&gt; chs;</div><div><span style="white-space:pre;">	</span>readstr(chs);</div><div><span style="white-space:pre;">	</span>node *r=NULL;</div><div><span style="white-space:pre;">	</span>for (int i=0;i&lt;(int)chs.size();i++){</div><div><span style="white-space:pre;">		</span>node *p=node::getnew();</div><div><span style="white-space:pre;">		</span>p-&gt;k=chs[i];</div><div><span style="white-space:pre;">		</span>treeadd(r,p);</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>Roots.push_back(r);</div><div><span style="white-space:pre;">	</span>curid=0;</div><div><span style="white-space:pre;">	</span>char cmd[10];</div><div><span style="white-space:pre;">	</span>while (scanf("%s",cmd)!=EOF){</div><div><span style="white-space:pre;">		</span>if (cmd[0]=='I'){</div><div><span style="white-space:pre;">			</span>int x;</div><div><span style="white-space:pre;">			</span>scanf("%d",&amp;x);</div><div><span style="white-space:pre;">			</span>scanf("%s",cmd);</div><div><span style="white-space:pre;">			</span>Insert(x,cmd[0]);</div><div><span style="white-space:pre;">		</span>}else if (cmd[0]=='D'){</div><div><span style="white-space:pre;">			</span>int x;</div><div><span style="white-space:pre;">			</span>scanf("%d",&amp;x);</div><div><span style="white-space:pre;">			</span>Delete(x-1);</div><div><span style="white-space:pre;">		</span>}else if (cmd[0]=='P'){</div><div><span style="white-space:pre;">			</span>int x,y,z;</div><div><span style="white-space:pre;">			</span>scanf("%d%d%d",&amp;x,&amp;y,&amp;z);</div><div><span style="white-space:pre;">			</span>Print(x,y-1,z-1);</div><div><span style="white-space:pre;">		</span>}else if (cmd[0]=='C'){</div><div><span style="white-space:pre;">			</span>int x,y,z;</div><div><span style="white-space:pre;">			</span>scanf("%d%d%d",&amp;x,&amp;y,&amp;z);</div><div><span style="white-space:pre;">			</span>Revolve(x-1,y-1,z-1);</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>while (!Literbox.empty() &amp;&amp; Literbox.front().first&lt;curid-M){</div><div><span style="white-space:pre;">			</span>node::getnew(Literbox.front().second);</div><div><span style="white-space:pre;">			</span>Literbox.pop();</div><div><span style="white-space:pre;">		</span>}</div><div><span style="white-space:pre;">		</span>while ((int)Roots.size()&gt;M)Roots.pop_front();</div><div><span style="white-space:pre;">	</span>}</div><div><span style="white-space:pre;">	</span>return 0;</div><div>}</div></div></div>
+        <div class="nbw-blog-end"></div>
+
+        <div>
+		</div>
+		
+        <div>
+		</div>
+		
+		<div>
+      	  <div >
+		  	<script type="text/javascript" id="wumiiRelatedItems"></script>
+		  </div>
+		</div>
+		
+        <div class="ptc phide ztag">
+          <span class="ptcp">
+            <span class="iblock bcmimg">&nbsp;</span>
+            <span class="nbc-0 nbc-0-40 ptcmt ptcmt-2">评论这张</span>
+          </span>
+        </div>
+		<div class="ptc phide ztag">
+          <span class="ptcp">
+            <span class="nbc-0 nbc-0-40 ptcmi">
+              <img src="http://b.bst.126.net/newpage/images/microblog.png?1" />
+            </span>
+            <span class="nbc-0 nbc-0-40 ptcmt">转发至微博</span>
+          </span>
+        </div>
+        <div class="ptc phide ztag">
+          <span class="ptcp">
+            <span class="nbc-0 nbc-0-40 ptcmi">
+              <img src="http://b.bst.126.net/newpage/images/microblog.png?1" />
+            </span>
+            <span class="nbc-0 nbc-0-40 ptcmt">转发至微博</span>
+          </span>
+        </div>
+        
+        
+        <div class="nbw-act tbar fc03 clearfix">
+         <div style="height:24px;line-height:24px;">
+          <div class="pleft rdif">
+	          <span class="pnt pleft" id="$_spanRecommend"><img class="pclass" src="http://b.bst.126.net/style/common/tuijian.png"/></span>
+	        <span id="$_spanShowRecommend" class="pleft rdct  phide">
+	          <span class="pleft ul fc03"><span id="$_spanRecommendCount">0</span>人</span><span class="pleft iblock icn0 icn0-722 nbw-tgl1 nas-icn0fix">&nbsp;</span><span class="pleft iblock icn0 icn0-621 nbw-tgl0 nas-icn0fix">&nbsp;</span><span class="fc07"></span>|&nbsp;
+	        </span>
+	         <span class="fc07 pleft nas-tofix">分享到：</span><span class="nas-wrap pleft"><span id="$_shareBtn_163weibo" title="分享到网易微博" class="nas-itm nas-itm0">&nbsp;</span><span id="$_shareBtn_sinaweibo" title="分享到新浪微博" class="nas-itm nas-itm6">&nbsp;</span><span id="$_shareBtn_qqweibo" title="分享到腾讯微博" class="nas-itm nas-itm9">&nbsp;</span><span class="nas-itm nas-itm7" title="分享到MSN" id="$_shareBtn_msn">&nbsp;</span><span class="nas-itm nas-itm3" title="分享到QQ空间" id="$_shareBtn_qq">&nbsp;</span><span class="nas-itm nas-itm1" title="分享到人人网" id="$_shareBtn_renren">&nbsp;</span><span class="nas-itm nas-itm2" title="分享到开心网" id="$_shareBtn_kaixin">&nbsp;</span><span class="nas-itm nas-itm4" title="分享到豆瓣" id="$_shareBtn_douban">&nbsp;</span></span></span>
+          </div>
+          <div class="pright">
+              <span class="fc07">阅读(<span id="$_spaniReadCount">458</span>)</span><span class="sep fc07">|</span>
+              <span class="fc07">评论(<span id="$_spaniCommentCount">0</span>)</span><span class="sep fc07">|</span>
+              <span class="m2a" id="$_spanCite">引用</span> <span class="m2a" id="$_spanCiteCount">(0)</span>
+              <span class="sep fc07">|</span><span id="$_spanReport" class="m2a">举报</span>
+          </div>
+         </div>
+        </div>
+      </div>
+      <div class="snl">
+        <div class="phide bdwb bds2 bdc0 rdcnt" id="$_divRecommendContent"></div>
+        <div id="yodaoad" class="bdwb bds2 bdc0" style="display:none;_zoom:1;">&nbsp;</div>
+        <div id="$_divTopLink" class='top fc03 clearfix'>
+	        <span class="ilft iblock icn0 icn0-620">&nbsp;</span>
+	        <div class="pleft thide"><a class="m2a"  href="http://fanhq666.blog.163.com/blog/static/819434262011058722460/">测试:chrome执行javascript有多快?</a></div>
+	        <span class="irgt iblock icn0 icn0-619">&nbsp;</span>
+	        <div class="pright thide"><a class="m2a"  href="http://fanhq666.blog.163.com/blog/static/8194342620111215539865/">有关操作系统的纠结事</a></div>
+	     </div> 
+	    <div class="relateblog phide">
+          <h4 class="bdwb bds2 bdc0 fc07 fs0">历史上的今天</h4>
+          <div class="cnt ztag clearfix"></div>
+        </div>
+	    <div class="relateblog phide">
+          <h4 class="bdwb bds2 bdc0 fc07 fs0">相关文章</h4>
+          <div class="cnt ztag clearfix"></div>
+        </div>
+	    <div class="author">
+	      <h4 class="bdwb bds2 bdc0 fc07 fs0">最近读者</h4>
+	      <div class="cnt ztag clearfix"></div>
+	    </div>
+	    <div class="phide" id="yodaoad_1" style="_zoom:1;"></div>
+	    <div class="comment">
+	      <h4 class="bdwb bds2 bdc0 fc07 fs0">评论</h4>
+	      <a name="blogComment" id="blogComment"></a>
+	      <div class="ztag"></div>
+	    </div>
+	    <div class="phide" id="yodaoad_3" style="_zoom:1;"></div>
+      </div>
+      <div class="cite ztag fc03"></div>
+    </div>
+   </div>
+  </div>
+</div>
+<div class="phide nb-init">
+  <textarea name="js">
+    this.p={  m:2,
+              b:2,
+              id:'fks_094071092086086064085085095095092087088071087082084069',
+              blogTitle:'挖掘Treap的潜力',
+              blogAbstract:'你的Treap能支持以下操作吗？<wbr\><div\>1.区间增减</div\><div\>2.区间求最小</div\><div\>3.区间反转（倒序）</div\><div\>4.区间移动（把一段剪切、粘贴）</div\><div\>不能？只能用splay？</div\><div\><br\></div\><div\>其实，Treap也可以办到。</div\><div\>方法就是：设计把一个子树split成两个子树的算法，以及把两个子树merge的算法。</div\><div\><br\></div\><div\>例：poj3580，代码见最后</div\><div\><br\></div\><div\>另外一个应用：可持久化Treap</div\><div\>设计一个数据结构维护一个序列</div\><div\>&nbsp;插入一个元素</div\><div\>&nbsp;删除一个元素</div\><div\>&nbsp;移动连续的一段（就是剪切、粘贴）</div\><div\>&nbsp;＊查询m次操作之前的第p个元素是谁</div\><div\>例：超级文本编辑器（我正在构思的一道题）</div\><div\>文本长度不超过100000</div\><div\>每次可以插入、删除、剪切粘贴</div\><div\>要求在线算法</div\><div\>每个操作10微秒时限，一共32M内存</div\><div\><br\></div\><div\>这个可以参见算法导论，核心思想是：一个节点创建之后就不再删除。另外用垃圾回收。</div\>',
+              blogTag:'',
+              blogUrl:'blog/static/819434262011021105212299',
+              isPublished:1,
+              istop:false,
+              type:0,
+              modifyTime:1295621973983,
+              publishTime:1295621973949,
+              permalink:'blog/static/819434262011021105212299',
+              commentCount:0,
+              mainCommentCount:0,
+              recommendCount:0,
+              bsrk:-100,
+              publisherId:0,
+              recomBlogHome:false,
+              attachmentsFileIds:[],
+              vote:{},
+              groupInfo:{},
+              friendstatus:'none',
+              followstatus:'unFollow',
+              pubSucc:'',
+              visitorProvince:'浙江',
+              visitorCity:'绍兴',
+              postAddInfo:{},
+              mset:'000',
+              mcon:'',
+              srk:-100,
+              remindgoodnightblog:false,
+              isBlackVisitor:false,
+              isShowYodaoAd:false,
+              hostIntro:'',
+              hmcon:'0',
+              lofter_single:'<a hidefocus="true" target="_blank" href="http://www.lofter.com/touch"><img onload="var nimg = new Image(); nimg.src=\'http://blog.163.com/newpage/images/analyse.png?lofter_single&t=\'+new Date().getTime()" border="0" src="http://b2.bst.126.net/newpage/images/lofter_single4.jpg"/></a>'
+            }
+  </textarea>
+  <textarea name="jst" id="m-3-jst-1">
+    {list a as x}
+    {if !!x}
+    <div class="iblock nbw-fce nbw-f40">
+      <a class="fc03 noul" target="_blank" hidefocus="true" href="http://blog.163.com/${x.visitorName}/">
+      {if x.visitorName==visitor.userName}
+      <img alt="${x.visitorNickname|escape}" onerror="this.src=location.f40" class="cwd bdwa bdc0" src="${fn1(x.visitorName)}&r=${visitor.imageUpdateTime}"/>
+      {else}
+      <img alt="${x.visitorNickname|escape}" onerror="this.src=location.f40" class="cwd bdwa bdc0" src="${fn1(x.visitorName)}"/>
+      {/if}
+      </a>
+      <div class="cwd vname thide">
+        {if x.moveFrom=='wap'}
+          <a class="noul pnt" target="_blank" href="http://blog.163.com/services/wapblog.html?frompersonalbloghome"><span title="来自网易手机博客" class="iblock wapIcon">&nbsp;</span></a>
+        {elseif x.moveFrom=='iphone'}
+          <a class="noul pnt" target="_blank"><span title="来自iPhone客户端" class="iblock iphoneIcon">&nbsp;</span></a>
+        {elseif x.moveFrom=='android'}
+          <a class="noul pnt" target="_blank"><span title="来自Android客户端" class="iblock androidIcon">&nbsp;</span></a>
+        {elseif x.moveFrom=='mobile'}
+          <a class="noul pnt" target="_blank" href="http://blog.163.com/services/emsblog.html?frompersonalbloghome"><span title="来自网易短信写博" class="iblock wapIcon">&nbsp;</span></a>
+        {/if}
+        <a class="fc03 m2a"  target="_blank" hidefocus="true" href="http://blog.163.com/${x.visitorName}/">
+          ${fn(x.visitorNickname,8)|escape}
+        </a>
+      </div>
+    </div>
+    {/if}
+    {/list}
+  </textarea>
+  <textarea name="jst" id="m-3-jst-2">
+    {if !!a}
+    <a target="_blank" href="http://blog.163.com/${a.userName}/"><img class="bdwa bdc0 pnt" onerror="this.src=location.f60" src="${fn1(a.userName)}"/></a>
+    <a target="_blank" class="fc03 m2a" href="http://blog.163.com/${a.userName}/">${fn(a.nickname,8)|escape}</a>
+    <div class="intro fc05">${a.selfIntro|escape}{if great260}${suplement}{/if}</div>
+	    <div class="acts ztag"></div>
+	  <div class="mbga phide xtag">
+        <div class="mbgai">&nbsp;</div>
+        <a class="fc03 xtag m2a" href="#" target="_blank"></a>
+      </div>
+    {/if}
+  </textarea>
+  <#--最新日志，群博日志-->
+  <textarea name="jst" id="m-3-jst-3">
+    {list a as x}
+    {if !!x}
+    <li class="thide"><a target="_blank" class="fc03 m2a" href="${furl()}${x.permalink}/?latestBlog">${fn(x.title,26)|escape}</a></li>
+    {/if}
+    {/list}
+  </textarea>
+  <#--推荐日志-->
+  <textarea name="jst" id="m-3-jst-4">
+    <p class="fc06">推荐过这篇日志的人：</p>
+    <div>
+      {list a as x}
+      {if !!x}
+      <div class="iblock nbw-fce nbw-f40">
+        <a class="fc03 noul" target="_blank" hidefocus="true" href="http://blog.163.com/${x.recommenderName}/">
+        <img alt="${x.recommenderNickname|escape}" onerror="this.src=location.f40" class="cwd bdwa bdc0" src="${fn1(x.recommenderName)}"/>
+        </a>
+        <div class="cwd thide">
+          <a class="fc03 m2a" target="_blank" hidefocus="true" href="http://blog.163.com/${x.recommenderName}/">
+            ${fn(x.recommenderNickname,6)|escape}
+          </a>
+        </div>
+      </div>
+      {/if}
+      {/list}
+    </div>
+    {if !!b&&b.length>0}
+    <p  class="fc06">他们还推荐了：</p>
+    <ul>
+    {list b as y}
+      {if !!y}
+        <li class="rrb"><span class="iblock">&#183;</span><a class="fc03 m2a" target="_blank" href="http://blog.163.com/${y.recommendBlogPermalink}/?from=blog/static/819434262011021105212299">${y.recommendBlogTitle|escape}</a></li>
+      {/if}
+    {/list}
+    </ul>
+    {/if}
+  </textarea>
+  <#--引用记录-->
+  <textarea name="jst" id="m-3-jst-5">
+    <span class="pleft fc07">引用记录：</span>
+    <ul class="tbac">
+    {list d as x}
+      <li class="clearfix">
+        <span class="pleft iblock">&#183;</span>
+        <div class="tbl thide pleft"><span><a target="_blank" class="fc07 m2a" href="${x.referBlogUrl}">${x.referBlogTitle|escape}</a></span></div>
+        <div class="tbr pleft"><span><a target="_blank" class="fc07 m2a" href="${x.referHomePage}">${x.referUserName|escape}</a></span></div>
+      </li>
+    {/list}
+    </ul>
+  </textarea>
+  <#--博主推荐-->
+  <textarea name="jst" id="m-3-jst-6">
+    {list a as x}
+    {if !!x}
+    <li class="thide"><a target="_blank" class="fc03 m2a" href="http://blog.163.com/${x.userName}/${x.permalink}/?recommendBlog" title="${x.title|default:""|escape}">${x.title|default:""|escape}</a></li>
+    {/if}
+    {/list}
+  </textarea>
+  <#--随机阅读-->
+  <textarea name="jst" id="m-3-jst-7">
+    {list a as x}
+    {if !!x}
+    <li class="thide"><a target="_blank" class="fc03 m2a" href="http://blog.163.com/${x.userName}/${x.permalink}/?personalRecomBlog" title="${x.title|default:""|escape}">${x.title|default:""|escape}</a></li>
+    {/if}
+    {/list}
+  </textarea>
+  <#--首页推荐-->
+  <textarea name="jst" id="m-3-jst-8">
+    {list a as x}
+    {if !!x}
+    <li class="thide"><a target="_blank" class="fc03 m2a" target="_blank" href="${x.blogUrl|default:""|escape}?recommendReader" title="${x.blogTile|default:""|escape}">${x.blogTile|default:""|escape}</a></li>
+    {/if}
+    {/list}
+  </textarea>
+  <#--相关文章-->
+  <textarea name="jst" id="m-3-jst-9">
+    <ul>
+      {list a as x}
+      {if x_index>9}{break}{/if}
+      {if !!x}
+        <li class="thide fc03">
+          <a class="m2a" target="_blank" target="_blank"  href="${x.url|default:""}?fromdm&fromSearch&isFromSearchEngine=${isFromSearchEngine|default:"no"}"  title="${x.title|default:""|escape}">${x.title|default:""|escape}</a><span class="fc07">${fn2(parseInt(x.date),'yyyy-MM-dd HH:mm:ss')}</span>
+        </li>
+      {/if}
+      {/list}
+    </ul>
+  </textarea>
+  <#--历史上的今天-->
+  <textarea name="jst" id="m-3-jst-10">
+    <ul>
+      {list a as x}
+      {if x_index>4}{break}{/if}
+      {if !!x}
+        <li class="thide fc03">
+          <a class="m2a" target="_blank"  href="http://blog.163.com/${x.userName}/${x.permalink|default:""}"  title="${x.title|default:""|escape}">${fn1(x.title,60)|escape}</a><span class="fc07">${fn2(x.publishTime,'yyyy-MM-dd HH:mm:ss')}</span>
+        </li>
+      {/if}
+      {/list}
+    </ul>
+  </textarea>
+  <#--右边模块结构-->
+  <textarea name="txt" id="m-3-txt-0">
+    <div class="uinfo ztag"></div>
+    <h4 class="fc07 fs0 ltt">最新日志</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">该作者的其他文章</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">博主推荐</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">相关日志</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">随机阅读</h4>
+    <ul class="ztag blst"></ul>
+    <h4 class="fc07 fs0 ltt phide ztag">首页推荐</h4>
+    <ul class="ztag blst"></ul>
+    <div class="more"><a target="_blank" class="fc03 m2a" href="http://blog.163.com">更多&gt;&gt;</a></div>
+    <br/><br/>
+    <div id="yodaoad_r" style="display:none;_zoom:1;"></div>
+    <div id="lofter_single"></div>
+  </textarea>
+  <#--评论模块结构-->
+  <textarea name="txt" id="m-3-txt-1">
+    <div class="publish ztag"></div>
+    <div class="bdwt bds2 bdc0 phide" id="yodaoad_2" style="_zoom:1;"></div>
+    <div class="ztag bdwt bds2 bdc0">
+      <div class="case"></div>
+      <div class="clearfix"></div>
+    </div>
+  </textarea>
+  <#--引用模块结构-->
+  <textarea name="jst" id="m-3-txt-2">
+     <div class="close">
+       <span class="ztag iblock icn0 icn0-57">&nbsp;</span>
+     </div>
+	 <div class="ztag phide"></div>
+  </textarea>
+    <#--博主发起的投票-->
+  <textarea name="jst" id="m-3-txt-3">
+    {list a as x}
+    {if !!x}
+      <li>
+      <a href="http://blog.163.com/${x.userName}/" target="_blank" class="m2a fc03">${x.nickName|escape}</a>&nbsp;&nbsp;投票给
+        {var first_option = true;}
+        {list x.voteDetailList as voteToOption}
+            {if voteToOption==1}
+              {if first_option==false},{/if}&nbsp;&nbsp;“${b[voteToOption_index]}”&nbsp;&nbsp;
+            {/if}
+        {/list}
+        {if (x.role!="-1") },“我是${c[x.role]}”&nbsp;&nbsp;{/if}
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="fc07">&nbsp;&nbsp;&nbsp;&nbsp;${fn1(x.voteTime)}</span>
+        {if x.userName==''}{/if}
+    {/if}
+    {/list}
+  </textarea>
+</div>
+<script type="text/javascript">
+var wumiiPermaLink = "http://blog.163.com/fanhq666/blog/static/819434262011021105212299/"; //文章的永久链接，作为文章的唯一标识
+var wumiiTags = ""; //文章标签，以英文逗号分隔，如："标签1,标签2"
+var wumiiSitePrefix = "http://blog.163.com/fanhq666/"; //博客的主页地址，作为博客的唯一标识
+var wumiiParams = "&num=5&mode=3&pf=blog163"; //num为默认显示的相关文章数目，mode为默认的显示模式（1为文字，2为图片，3为自动）
+</script>
+<script type="text/javascript" src="http://widget.wumii.com/ext/relatedItemsWidget.htm"></script>
+</div>
+      <div class="l cl h100">&nbsp;</div>
+      <div class="r cr h100">&nbsp;</div>
+    </div>
+    <div class="nb-mb lcr bh space">
+      <div class="l bl bh">&nbsp;</div>
+      <div class="r br bh">&nbsp;</div>
+      <div class="c bc bh lcr">&nbsp;</div>
+    </div>
+  </div>
+
+</div>
+      <div class="l wl g lg h100">&nbsp;</div>
+      <div class="l wl t lt">&nbsp;</div>
+      <div class="l wl b lb">&nbsp;</div>
+      <div class="r wr g rg h100">&nbsp;</div>
+      <div class="r wr t rt">&nbsp;</div>
+      <div class="r wr b rb">&nbsp;</div>
+    </div>
+  </div>
+  <div class="nb-are nb-smb"><div class="wkg h space"><div class="l h">&nbsp;</div><div class="r h">&nbsp;</div><div class="c h">&nbsp;</div></div></div>
+<div class="nb-are nb-fot">
+  <div class="wkg h">
+    <h2>页脚</h2>
+    <div class="k">      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://corp.163.com/index_gb.html">公司简介</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://gb.corp.163.com/gb/contactus.html">联系方法</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://corp.163.com/gb/job/job.html">招聘信息</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://help.163.com/?b13abk1">客户服务</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://corp.163.com/gb/legal/legal.html">隐私政策</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://blog.163.com/public/theme/">博客风格</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://blog.163.com/services/wapblog.html">手机博客</a>
+      <span class="p fc10">-</span>
+      <a rel="nofollow" class="m2a fc08" target="_blank" href="http://blog.163.com/vip.do">VIP博客</a>
+      
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="http://fanhq666.blog.163.com/rss/"/>
+      <span class="p fc10">-</span><span class="fc08" id="$_foot_subscribe"><span class="iblock m2a icn0 icn0-919">&nbsp;</span><a class="m2a fc08">订阅此博客</a></span>
+    </div>
+    <p class="fc08">网易公司版权所有&nbsp;&copy;1997-2012</p>
+  </div>
+</div></div>
+    <!--[if lte IE 6]></div><![endif]-->
+  <!--[if lte IE 6]></div><![endif]-->
+  <div class="nb-layer" id="blog-163-com-layer"></div>
+  <div class="nb-tpl nb-init phide" id="blog-163-com-template" style="display:none;">  <textarea rows="1" cols="1" name="jst" id="nb-jst-a1">  <a rel="nofollow" class="pr" target="_blank" href="http://help.163.com/special/007525FT/blog.html?b13aze1">帮助</a>
+  <span class="fr iblock space icn1 icn1-4">&nbsp;</span>
+  <a class="pr" target="_blank" href="http://blog.163.com/activation.do?host=activation&&username=${u}">${u}</a>
+</textarea>
+  <textarea rows="1" cols="1" name="jst" id="nb-jst-d0">      {list wl as x}
+        <div class="grp">${x.g}</div>
+        {list x.l as y}
+        <a class="itm noul" href="#" hidefocus="true" name="{if typeof(y.v)=='string'}${y.v}{else}${y_index}{/if}">${y.n}</a>
+        {/list}
+      {/list}
+</textarea>
+  <textarea rows="1" cols="1" name="jst" id="nb-jst-d1">	{if defined('wl')}
+        {list wl as x}<a class="itm noul" href="#" hidefocus="true" name="${x.v}">${x.n}</a>{/list}
+    {/if}
+</textarea>
+</div>
+<script type="text/javascript">
+  window.N = {tm:{'zbtn':'nbtn',
+                  'bdc0':'bdc0','bdc2':'bdc1',
+				  'bgc0':'bgc0','bgc1':'bgc1','bgc2':'bgc2','bgh0':'bgc9',
+				  'fc00':'fc03','fc01':'fc04','fc02':'fc05','fc03':'fc06','fc04':'fc07','fc05':'fc09'}};
+  Date.servTime = '05/05/2012 09:38:52';
+  location.api = 'http://api.blog.163.com/';
+  location.msg = 'http://api.blog.163.com/msg/dwr';
+  location.dwr = 'http://api.blog.163.com/fanhq666/dwr';
+  location.vcd = 'http://api.blog.163.com/cap/captcha.jpgx?parentId=81943426&r=';
+  location.mrt = 'http://b.bst.126.net/newpage/style/mbox/';
+  location.fce = 'http://os.blog.163.com/common/ava.s?host=';
+  location.fce2= 'http://os.blog.163.com/common/ava.s?host=';
+  location.passportfce = 'http://os.blog.163.com/common/ava.s?passport=';
+  location.fpr = 'http://b.bst.126.net/common/portrait/face/preview/';
+  location.f60 = 'http://b.bst.126.net/common/face60.png';
+  location.f140= 'http://b.bst.126.net/common/face140.png';
+  location.f40 = location.f140;
+  location.adf140= 'http://b.bst.126.net/common/admireface140.png';
+  location.ept = 'http://b.bst.126.net/common/empty.png';
+  location.guide_profile_add= 'http://b.bst.126.net/common/guide_profile_add.gif';
+  location.phtoto_dream = 'http://photo.dream.163.com/blog/writeBlogCallback.do';
+  window.CF = {
+    ca:false
+   ,cb:''
+   ,cc:false
+   ,cd:false
+   ,ce:'-3'
+   ,ck:0
+   ,ci:['api.blog.163.com'
+       ,'http://photo.163.com/photo/html/crossdomain.html?t=20100205'
+        
+        ,'ud.blog.163.com'
+        
+        
+        
+        
+        ]
+   ,cj:[-3]
+   ,cl:''
+   ,cm:["","blog/","album/","music/","collection/","friends/","profile/","pprank/"]
+   ,cf:0
+   ,co:{pv:false
+       ,ti:4011
+       ,tn:''
+       ,tc:0
+       ,tl:3
+       ,ut:0
+       ,un:''
+       ,um:''
+       ,ui:0
+       ,ud:false}
+   ,cp:{nr:0
+       ,cr:0
+       ,vr:-100
+       ,fr:0}
+   ,cs:0
+   ,ct:{'nav':['首页','日志','相册','音乐','收藏','博友','关于我'],'enabled':[0,1,6],'defaultnav':parseInt('1111111',2)}
+   ,cu:false
+   ,cv:false
+   ,cw:false
+  };
+  window.UD = {};
+  UD.host = {
+      userId:81943426
+     ,userName:'fanhq666'
+     ,nickName:'fanhq666'
+     ,imageUpdateTime:-1
+     ,baseUrl:'http://fanhq666.blog.163.com/'
+     ,gender:'他'
+     ,email:'fanhq666@163.com'
+     ,photo163Name:'fanhq666'
+     ,photo163HostName:'fanhq666'
+     ,TOKEN_HTMLMODULE:''
+     ,isMultiUserBlog:false
+     ,isWumiUser:true
+     ,sRank:-100
+  };
+</script>
+    <script type="text/javascript" src="http://b1.bst.126.net/newpage/r/j/pc.js?v=4746325431"></script>
+    <script type="text/javascript" src="http://b1.bst.126.net/newpage/r/j/m/m-3/pm.js?v=3992803134"></script>
+  <script src="http://analytics.163.com/ntes.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    _ntes_nacc='blog';neteaseTracker();
+    
+    new Image().src = 'http://blog.163.com/newpage/images/analyse.png?s=p&t='+new Date().getTime();
+  </script>
+
+    <script type="text/javascript" src="/newpage/prettycode/prettify.js"></script>
+</body>
+</html>
+<!--v�媶�#n勞A狶R嗹鯧P珞��"�2嗵隢F襠v%諄紸#$r(钚藰铇�-�(粕鶠K>艈L熙蓚D{纥4C5魄�宫,減z�醃�;&贼U%労痫颎;=24>�鶮I #贆鸣U~惜`E倕裥�銒rq@d騳r+㤘赟誆s�w(鹔恕曀_g&Yp姕攕�T-龍��齁B痛
+碿竬�%�7�螶p銯�'萅cs抯b駩廳猡r刾+!岶渠�!�6顙�*L%Ρ6銥徲�,^�礘9O蟇q孬兩9觢取X	窂芣詌稛:畘 鏜R$V�鏜鏜鏜徫Le�S 鏜-->

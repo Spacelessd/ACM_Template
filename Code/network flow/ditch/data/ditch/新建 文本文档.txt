@@ -1,0 +1,91 @@
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>set name=ditch
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>for /L %x in (1 1
+10) do (
+mkd
+ ditch.exe
+ ren ditch.in ditch%x.in
+ ren ditch.out ditch%x.out
+)
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch1.in
+ ren ditch.out ditch1.out
+)
+5 7
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch2.in
+ ren ditch.out ditch2.out
+)
+
+10 20
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch3.in
+ ren ditch.out ditch3.out
+)
+50 100
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch4.in
+ ren ditch.out ditch4.out
+)
+100 300
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch5.in
+ ren ditch.out ditch5.out
+)
+200 500
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch6.in
+ ren ditch.out ditch6.out
+)
+100 3000
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch7.in
+ ren ditch.out ditch7.out
+)
+3000 7000
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch8.in
+ ren ditch.out ditch8.out
+)
+1500 20000
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch9.in
+ ren ditch.out ditch9.out
+)
+200 800
+
+C:\Documents and Settings\Administrator\桌面\ditch\data\ditch>(
+mkd
+ ditch.exe
+ ren ditch.in ditch10.in
+ ren ditch.out ditch10.out
+)
+400 600

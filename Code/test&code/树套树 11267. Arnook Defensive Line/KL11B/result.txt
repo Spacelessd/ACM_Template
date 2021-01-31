@@ -1,0 +1,12 @@
+spoj	11267. Arnook Defensive Line	result:
+分治hqz_best	5.09
+分治hqz		7.61
+分治dhh		8.45
+treap		17.42
+treap++		15.29
+splay		15.73
+RBtree		11.62
+BST		13.22
+AVL		15.58
+SBT		11.07
+退化版SBT	11.06

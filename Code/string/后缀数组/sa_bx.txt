@@ -1,0 +1,40 @@
+memset(c)
+for (i=1 i<=n; ++ i) ++c[str[i]]
+for (i=1;i<=max(n,26);++i) c[i]+=c[i-1];
+for (i=n;i;--i) sa[c[str[i]]--]=i;
+rank[sa[1]]=1
+for (i=2;i<=n;++i)
+	rank[sa[i]]=rank[sa[i-1]]+(str[sa[i]] != str[sa[i-1]]);
+
+for (L=1;L<n;L*=2)
+
+
+memset(c)
+for (i=1 i<=n; ++ i) ++c[rank[i+L]]
+for (i=1;i<=max(n,26);++i) c[i]+=c[i-1];
+for (i=n;i;--i) tmp[c[rank[i]]--]=i;
+
+memset(c)
+for (i=1 i<=n; ++ i) ++c[rank[i]]
+for (i=1;i<=max(n,26);++i) c[i]+=c[i-1];
+for (i=n;i;--i) sa[c[rank[tmp[i]]]--]=tmp[i];
+
+tmp[sa[1]]=1
+for (i=2;i<=n;++i)
+	tmp[sa[i]]=tmp[sa[i-1]]+(rank[sa[i]] != rank[sa[i-1]] || rank[sa[i]+L] != rank[sa[i-1]+L]);
+
+rank = tmp
+
+
+for (i=1,p=0;i<=n;++i)
+if rank[i]=1 h[rank[i]]=0; else
+{
+	p=max(p-1,0)
+	j=sa[rank[i]-1]
+	while (str[i+p]==str[j+p])++p;
+	
+	height[rank[i]]=p;
+}
+
+x x+1
+	y y+1

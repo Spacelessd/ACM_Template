@@ -1,0 +1,130 @@
+{
+ID: caesius1
+PROG: ditch
+LANG: PASCAL
+}
+program ditch;
+const
+   maxn=1000;
+   maxm=500010;
+var
+   lin            :array[1..maxm*2,1..2] of longint;   //此处需乘以2，因为存储了双向边
+   con          :array[1..maxn,1..maxn] of longint;
+   poi,sta,next,
+   lev,line     :array[1..maxn] of longint;
+   l1,n,m,k,tot,s,t,a,b,c:longint;
+procedure inp(a,b:longint);
+begin
+   inc(k);
+   lin[k,1]:=b;
+   lin[k,2]:=poi[a];
+   poi[a]:=k;
+end;
+procedure bfs;
+var
+   i,j,lin1,a:longint;
+begin
+   i:=1;
+   j:=1;
+   line[1]:=s;
+   lev[s]:=1;
+   while i<=j do
+      begin
+      a:=line[i];
+      lin1:=poi[a];
+      while lin1<>-1 do
+         begin
+         if (con[a,lin[lin1,1]]>0) and (lev[lin[lin1,1]]=0) then
+            begin
+            lev[lin[lin1,1]]:=lev[a]+1;
+            inc(j);
+            line[j]:=lin[lin1,1];
+            end;
+         lin1:=lin[lin1,2];
+         end;
+      inc(i);
+      end;
+end;
+procedure dfs;
+var
+   st,a,b,lin1,l1,min,minp:longint;
+begin
+   st:=1;
+   sta[1]:=s;
+   next[s]:=poi[s];   //next未在主过程中初始化，改由行85初时化，此处初时化起点
+   repeat
+      if st=0 then
+         break;
+      a:=sta[st];
+      if a=t then
+         begin
+         min:=maxlongint;
+         for l1:=st-1 downto 1 do
+            if con[sta[l1],sta[l1+1]]<min then
+               min:=con[sta[l1],sta[l1+1]];
+         for l1:=st-1 downto 1 do
+            begin
+            dec(con[sta[l1],sta[l1+1]],min);  //注意dec和inc：别弄反了~~
+            inc(con[sta[l1+1],sta[l1]],min);
+            if con[sta[l1],sta[l1+1]]=0 then
+               minp:=l1;
+            end;
+         inc(tot,min);  //将增广路流量加入总流量
+         st:=minp;   //退栈
+         continue;
+         end;
+      lin1:=next[a];
+      while lin1<>-1 do
+         begin
+         b:=lin[lin1,1];
+         if (con[a,b]>0) and (lev[b]=lev[a]+1) then 
+            begin
+            inc(st);
+            sta[st]:=b;
+            next[b]:=poi[b];
+            next[a]:=lin[lin1,2];  //记录下次搜索的起始边
+            break;
+            end;
+         lin1:=lin[lin1,2];
+         end;
+      if lin1=-1 then //处理从86行跳出的情况
+         begin
+         lev[sta[st]]:=maxlongint;
+         dec(st);
+         end;
+   until false;
+end;
+begin
+   assign(input,'ditch.in');
+   assign(output,'ditch.out');
+   reset(input);
+   read(m,n);
+   for l1:=1 to n do
+      poi[l1]:=-1;
+   fillchar(con,sizeof(con),0);
+   k:=0;
+   for l1:=1 to m do
+      begin
+      read(a,b,c);
+      if (con[a,b]=0) and (con[b,a]=0) then  //处理重边
+         begin
+         inp(a,b);
+         inp(b,a);
+         end;
+      inc(con[a,b],c);
+      end;
+   close(input);
+   rewrite(output);
+   s:=1;
+   t:=n;
+   tot:=0;
+   repeat
+      fillchar(lev,sizeof(lev),0);  //初始化高度表~~~很容易忘记的工作
+      bfs;
+      if lev[t]=0 then
+         break;
+      dfs;
+   until false;
+   writeln(tot);
+   close(output);
+end.

@@ -1,0 +1,130 @@
+#include<cstdio>
+#include<cstring>
+#include<algorithm>
+#define CH getchar()
+#define ll int
+const int oo = 1000000007, N = 20005;
+const ll Q = 1365464457;
+struct note
+{
+    ll v;
+} c[N];
+int fa[N], ed[N], son[N], next[N], l[N], r[N], B[N], a[N], f[N];
+ll v[N];
+int len, n;
+long long ans, P[N];
+void read(int &x)
+{
+    x = 0;
+    char ch;
+    for (ch = CH; ch < '0' || ch > '9'; ch = CH);
+    for (; ch >= '0' && ch <= '9'; x = x * 10 + ch - 48, ch = CH);
+}
+bool cmp(const note i, const note j)
+{
+    return i.v < j.v;
+}
+void dfs(int x, int y)
+{
+    fa[x] = y;
+    f[++len] = x;
+    for (int p = son[x]; p; p = next[p])
+        if (ed[p] != y) dfs(ed[p], x);
+}
+struct hash{
+	const static int N=70005;
+	static int p;
+	int v[N],next[N],l;
+	ll key[N];
+	void clear(int len){
+		for (int i=0;i<len;++i)v[i]=0;
+		l=0;p=len-1;
+	}
+	void insert(int x){
+		int x1=abs(x)&p;
+		key[++l]=x;next[l]=v[x1];v[x1]=l;
+	}
+	void print(){
+		for (int i=0;i<p;++i){
+			for (int j=v[i];j;j=next[j])printf("%d ",key[j]);
+			printf("end\n");
+		}
+	}
+};int hash::p;
+hash H;
+#define Pmax 1048575
+int dhh[Pmax];
+int tmp[N];
+int s=0,s1=0;
+void work()
+{
+    for (int k = n; k; k--)
+    {
+        int i = f[k], l = 0, x = 1;
+        v[i] = 0;
+        for (int p = son[i]; p; p = next[p])
+        {
+            int j = ed[p];
+            if (fa[i] != j) c[l++].v = v[j];
+        }
+        for (int j = 0; j <l; j++)tmp[j]=abs((c[j].v^523543651)>>12)&Pmax;
+        for (int j = 0; j <l; j++)++dhh[tmp[j]];
+        for (int j = 0; j <l; j++)
+			if (dhh[tmp[j]]){
+				if (dhh[tmp[j]]==1){
+					dhh[tmp[j]]=0;continue;
+				}
+				ans = ans * P[dhh[tmp[j]]] % oo;
+				dhh[tmp[j]]=0;
+			}
+		int size=1;
+		while (size<l+5)size*=2,++s;
+        H.clear(size);
+        for (int j = 0; j < l; j++)H.insert(c[j].v);
+        v[i]=196456751;
+        for (int j = 0; j < H.p; j++)
+        	{
+				int sum=0;
+				for (int i1=H.v[j];i1;i1=H.next[i1])
+					v[i]+=H.key[i1];
+				v[i]=(v[i]*Q+164576509)^1235464571;
+			}
+		v[i] = (v[i] * Q) ^765430645;
+    }
+}
+int main()
+{
+	freopen("IOPC1200.in","r",stdin);
+	freopen("D.out","w",stdout);
+    P[0] = 1;
+    for (int i = 1; i <= 11000; i++) P[i] = P[i-1] * i % oo;
+    int t, x, y, l;
+    read(t);
+    while (t--)
+    {
+        read(n);s1+=n;
+        l = 0;
+        for (int i = 0; i < n; i++) son[i] = 0;
+        for (int i = 1; i < n; i++)
+        {
+            read(x), read(y);
+            ed[++l] = y;
+            next[l] = son[x];
+            son[x] = l;
+            ed[++l] = x;
+            next[l] = son[y];
+            son[y] = l;
+        }
+        len = 0;
+        dfs(0, -1);
+        ans = 1;
+        work();
+        printf("%d\n", ans);
+    }
+    printf("%d %d\n",s,s1);
+    //system("pause");
+    return 0;
+}
+
+
+

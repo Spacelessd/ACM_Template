@@ -1,0 +1,3 @@
+	node *insert(node *x,int key,int fix){
+		return (!a||x->fix>fix)?New(x,fix,split_l(x,key),split_r(x,key):
+			key<x->key?

@@ -1,0 +1,4 @@
+主程序是main.cpp
+源文件：input.txt
+压缩文件:compress.txt
+解压文件:decompress.txt

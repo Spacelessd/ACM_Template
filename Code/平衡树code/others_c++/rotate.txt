@@ -1,0 +1,39 @@
+	void left_rotate(int x)
+	{
+		int y=a[x].r,z=a[x].p;
+		a[x].r=a[y].l;
+		a[a[y].l].p=x;a[y].p=z;
+		if (x==a[a[x].p].l)a[z].l=y;
+           else a[z].r=y;
+		a[y].l=x;a[x].p=y;
+		update(x);update(y);
+	}
+	
+    void right_rotate(int x)
+	{
+		int y=a[x].l,z=a[x].p;
+		a[x].l=a[y].r;
+		a[a[y].r].p=x;a[y].p=z;
+		if (x==a[a[x].p].l)a[z].l=y;
+           else a[z].r=y;
+		a[y].r=x;a[x].p=y;
+		update(x);update(y);
+	}
+
+
+    void insert(int &root,int key)
+	{
+	   int x=root,y,z=newnode(key);
+       if (root==0){root=z;a[z].color=black;return;}
+       while (x){
+             y=x;
+             if (key<a[x].key)x=a[x].l;
+               else x=a[x].r;
+             }
+       a[z].p=y;
+       if (key<a[y].key)a[y].l=z;
+         else a[y].r=z;
+       if (a[y].color==red){
+           
+           }
+    }

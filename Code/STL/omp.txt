@@ -1,0 +1,28 @@
+#include"omp.h"
+
+g++ a.cpp -fopenmp
+
+
+
+//#include "omp.h"
+#include <stdio.h>
+#include<time.h>
+#include <stdlib.h>
+void Test (int n) {
+for(int i = 0; i < 10000; ++i) {
+//do nothing, just waste time
+}
+printf("%d, ", n);
+}
+int main(int argc, char* argv[]) {
+	int t1=clock();
+#pragma omp parallel for
+	//for(int i = 0; i < 10000000; i+=2)
+	//Test( i ),Test(i+1);
+	for(long long i = 0;i<=10000000000LL; i+=2);
+	printf("time=%d\n",clock()-t1);
+	system("pause");
+	return 0;
+}
+
+

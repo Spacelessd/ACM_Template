@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="ditch" file="ditch" code="100">
+        <language cmd="fpc ditch.pas" file="ditch.pas"/>
+        <language cmd="g++ -o ditch ditch.cpp -lm" file="ditch.cpp"/>
+        <language cmd="gcc -o ditch ditch.c -lm" file="ditch.c"/>
+    </source>
+    <task output="ditch.out" input="ditch.in" io="0" checker="全文比较">
+        <subtask score="25">
+            <point in="input7.txt" out="output7.txt" time="1" mem="128"/>
+        </subtask>
+        <subtask score="25">
+            <point in="input9.txt" out="output9.txt" time="1" mem="128"/>
+        </subtask>
+        <subtask score="25">
+            <point in="input10.txt" out="output10.txt" time="1" mem="128"/>
+        </subtask>
+        <subtask score="25">
+            <point in="input11.txt" out="output11.txt" time="1" mem="128"/>
+        </subtask>
+    </task>
+</problem>

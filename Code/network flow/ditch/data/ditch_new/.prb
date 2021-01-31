@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="ditch_new" file="ditch_new" code="100">
+        <language cmd="fpc ditch_new.pas" file="ditch_new.pas"/>
+        <language cmd="g++ -o ditch_new ditch_new.cpp -lm" file="ditch_new.cpp"/>
+        <language cmd="gcc -o ditch_new ditch_new.c -lm" file="ditch_new.c"/>
+    </source>
+    <task output="ditch_new.out" input="ditch_new.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="ditch0.in" out="ditch0.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch1.in" out="ditch1.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch2.in" out="ditch2.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch3.in" out="ditch3.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch4.in" out="ditch4.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch5.in" out="ditch5.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch6.in" out="ditch6.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch7.in" out="ditch7.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch8.in" out="ditch8.out" time="5" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="ditch9.in" out="ditch9.out" time="5" mem="512"/>
+        </subtask>
+    </task>
+</problem>

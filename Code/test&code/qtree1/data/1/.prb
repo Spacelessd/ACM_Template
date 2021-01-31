@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<problem type="TRA_0_4" maker="pcdialog">
+    <source dir="1" file="1" code="100">
+        <language cmd="fpc 1.pas" file="1.pas"/>
+        <language cmd="g++ -o 1 1.cpp -lm" file="1.cpp"/>
+        <language cmd="gcc -o 1 1.c -lm" file="1.c"/>
+    </source>
+    <task output="1.out" input="1.in" io="0" checker="全文比较">
+        <subtask score="10">
+            <point in="11.in" out="11.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="12.in" out="12.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="13.in" out="13.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="14.in" out="14.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="15.in" out="15.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="16.in" out="16.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="17.in" out="17.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="18.in" out="18.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="19.in" out="19.out" time="3" mem="512"/>
+        </subtask>
+        <subtask score="10">
+            <point in="110.in" out="110.out" time="3" mem="512"/>
+        </subtask>
+    </task>
+</problem>

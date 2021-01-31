@@ -1,0 +1,40 @@
+int Insert(node * x, int start, char s[]) {
+    int i, posbegin, posend;
+    node * t;char ch=s[start] - STARTCHAR;
+    if (x -> next[ch] == NULL) {
+        CreateNode(x -> next[ch]);
+        x -> next[ch] -> start = start;
+        x -> next[ch] -> end = len - 1;
+        x -> next[ch] -> father = x;
+        x -> next[ch] ->
+               length = x -> length + len - start;
+        x -> flag = NOTLEAF;
+        P = x;
+        return TYPE1;
+    } else {
+        posbegin = x -> next[ch] -> start;
+        posend = x -> next[ch] -> end;
+        for (i = posbegin; i <= posend; i++) {
+            if (s[i] != s[start + i - posbegin]) break;
+        }
+        if (i == posend + 1) {
+            return Insert(x -> next[ch], start + i - posbegin, s);
+        } else {
+            CreateNode(t);
+            t -> start = posbegin;
+            t -> end = i - 1;
+            t -> flag = NOTLEAF;
+            x -> next[ch] -> start = i;
+            t -> next[s[i] - STARTCHAR] = x -> next[ch];
+            t -> next[s[i] - STARTCHAR] -> father = t;
+            x -> next[ch] = t;
+            t -> father = x;
+            t -> length = x -> length + t -> end - t -> start + 1;
+            Insert(t, start + i - posbegin, s);
+            G = x;
+            P = t;
+            return TYPE2;
+        }
+    }
+}
+

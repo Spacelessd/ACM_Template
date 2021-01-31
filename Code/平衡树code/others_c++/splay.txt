@@ -1,0 +1,77 @@
+procedure Zig(x:longint);
+	var
+		y,z:longint;
+	begin
+		y:=a[x].p;
+		z:=a[y].p;
+		a[y].l:=a[x].r;
+		a[a[x].r].p:=y;
+		a[x].p:=z;
+		if y=a[z].l then a[z].l:=x else a[z].r:=x;
+		a[x].r:=y;
+		a[y].p:=x;
+		update(y);
+	end;
+
+	procedure Zag(x:longint);
+	var
+		y,z	:longint;
+	begin
+		y:=a[x].p;
+		z:=a[y].p;
+		a[y].r:=a[x].l;
+		a[a[x].l].p:=y;
+		a[x].p:=z;
+		if y=a[z].l then a[z].l:=x else a[z].r:=x;
+		a[x].l:=y;
+		a[y].p:=x;
+		update(y);
+	end;
+
+	procedure Splay(var root:longint;x:longint);
+	var
+		y,z	:longint;
+	begin
+		while a[x].p<>0 do
+		begin
+			y:=a[x].p;
+			z:=a[y].p;
+			if z=0 then
+			begin
+				if x=a[y].l then Zig(x) else Zag(x);
+			end
+			else
+			begin
+				if y=a[z].l then
+				begin
+					if x=a[y].l then
+					begin
+						Zig(y);
+						Zig(x);
+					end
+					else
+					begin
+						Zag(x);
+						Zig(x);
+					end;
+				end
+				else
+				begin
+					if x=a[y].r then
+					begin
+						Zag(y);
+						Zag(x);
+					end
+					else
+					begin
+						Zig(x);
+						Zag(x);
+					end;
+				end;
+			end;
+		end;
+		root:=x;
+		update(root);
+	end;
+
+
